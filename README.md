@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/banner.png" alt="cursor-team-kit — team-ops layer for Cursor AI" width="100%" />
+
 # ⚙️ cursor-team-kit
 
 **The team-ops layer for Cursor AI**
