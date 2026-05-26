@@ -3,7 +3,7 @@ name: fix-merge-conflicts
 description: Resolve conflict markers, explain what each side was doing and what was picked, then verify the result builds/tests pass. Triggered by "fix merge conflicts", "resolve conflicts", "fix this conflict".
 ---
 
-# Skill: fix-merge-conflicts
+# 🔀 Skill: fix-merge-conflicts
 
 ## Purpose
 Resolve Git conflict markers systematically: understand both sides before picking, explain every decision, and verify the result is coherent before marking resolved.

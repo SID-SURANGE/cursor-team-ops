@@ -1,6 +1,15 @@
-# Team Setup Examples
+<div align="center">
 
-Real-world examples of cursor-team-kit deployed across three common team structures. Each shows the exact files committed to the repo, what goes in `AGENTS.md`, and any project-specific rule or hook additions worth making.
+# 👥 Team Setup Examples
+
+[![cursor-team-kit](https://img.shields.io/badge/cursor--team--kit-v1.3.0-6366f1?style=flat-square)](README.md)
+
+Real-world setups for three team types — every file shown, nothing left as an exercise.
+Copy, adapt, commit, and your whole team is configured on next `git pull`.
+
+</div>
+
+---
 
 ---
 

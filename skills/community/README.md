@@ -1,6 +1,16 @@
-# Community Skills
+<div align="center">
 
-This directory contains community-contributed skills that have been reviewed and merged but are not part of the curated core set.
+# 🌱 Community Skills
+
+[![Contribute](https://img.shields.io/badge/contribute-a%20skill-a855f7?style=flat-square)](../../CONTRIBUTING.md)
+[![Attribution](https://img.shields.io/badge/attributions-on%20file-6366f1?style=flat-square)](ATTRIBUTIONS.md)
+
+Community-contributed skills — reviewed, attributed, and ready to use.
+Not yet in core, but tested on real projects.
+
+</div>
+
+---
 
 ## Quality bar for community skills
 

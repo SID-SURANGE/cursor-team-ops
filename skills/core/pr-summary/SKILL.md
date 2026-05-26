@@ -4,7 +4,7 @@ description: Create a pull request with a clear title, summary, and test plan us
 disable-model-invocation: true
 ---
 
-# PR Summary
+# 📬 PR Summary
 
 ## Run these in parallel first
 1. `git status` — confirm no uncommitted changes.

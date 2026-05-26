@@ -1,4 +1,15 @@
-# Changelog
+<div align="center">
+
+# 📋 Changelog
+
+[![Version](https://img.shields.io/badge/latest-1.3.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-kit/releases)
+
+All notable changes to cursor-team-kit are documented here.
+Versions follow [Semantic Versioning](https://semver.org/).
+
+</div>
+
+---
 
 ## 1.3.0 — 2026-05-26
 

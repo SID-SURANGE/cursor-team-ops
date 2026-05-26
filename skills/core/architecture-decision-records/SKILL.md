@@ -3,7 +3,7 @@ name: architecture-decision-records
 description: Create or update an ADR file following the standard template (Context, Decision, Consequences). Triggered by "create an ADR", "document this decision", "architecture-decision-records".
 ---
 
-# Skill: architecture-decision-records
+# 🏛️ Skill: architecture-decision-records
 
 ## Purpose
 Capture significant architectural or design decisions in a lightweight, durable format. Prevents "why did we do it this way?" from being answered by archaeology. Useful for code repos, requirements repos, and consulting deliverables alike.

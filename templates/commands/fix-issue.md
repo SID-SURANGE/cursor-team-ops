@@ -1,4 +1,4 @@
-# /fix-issue [number]
+# 🔧 /fix-issue [number]
 
 Fetch a GitHub issue, implement a fix, and open a pull request.
 

@@ -3,7 +3,7 @@ name: workflow-from-chats
 description: Scan the recent conversation for a repeated prompt pattern and produce a ready-to-commit SKILL.md. Triggered by "make this a skill", "extract this workflow", "save this as a skill".
 ---
 
-# Skill: workflow-from-chats
+# ⚡ Skill: workflow-from-chats
 
 ## Purpose
 Turn a repeated or valuable conversation pattern into a reusable, committable `SKILL.md` so the team never has to re-explain the same workflow.

@@ -3,7 +3,7 @@ name: verify-this
 description: Prove or disprove a claim with an evidence chain: baseline, treatment, commands run, and a verdict. Triggered by "verify this", "prove this works", "check if X is true".
 ---
 
-# Skill: verify-this
+# ✅ Skill: verify-this
 
 ## Purpose
 Replace "I think it works" with a structured evidence chain. Prevents shipping assumptions and makes verification reproducible.

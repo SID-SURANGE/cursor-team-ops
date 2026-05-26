@@ -4,7 +4,7 @@ description: Explore an unfamiliar or newly cloned repository to understand its 
 disable-model-invocation: true
 ---
 
-# Discover Repo
+# 🔭 Discover Repo
 
 ## Goal
 Give yourself enough context to work effectively in an unfamiliar repo in under 2 minutes. Do not make any changes during discovery.

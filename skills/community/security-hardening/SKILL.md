@@ -9,7 +9,7 @@ attribution: >
   No text was copied; this file is an original work.
 ---
 
-# Skill: security-hardening
+# 🛡️ Skill: security-hardening
 
 ## Purpose
 

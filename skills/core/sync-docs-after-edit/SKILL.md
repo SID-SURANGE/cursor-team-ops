@@ -3,7 +3,7 @@ name: sync-docs-after-edit
 description: After local changes or a commit, scan all .md files in the repo and flag any that are stale or contradicted by the changes. Triggered by "sync docs", "check if docs are up to date", "update docs after my changes", "did my change break any docs?".
 ---
 
-# Skill: sync-docs-after-edit
+# 📝 Skill: sync-docs-after-edit
 
 ## Purpose
 Keep documentation honest after local edits or commits. Distinct from `sync-docs-after-git-pull` (which fires after receiving remote changes) — this skill reacts to **what you just changed locally**.

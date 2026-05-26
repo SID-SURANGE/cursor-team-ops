@@ -4,7 +4,7 @@ description: Quality-check requirements, BRD, discovery, and understanding docum
 disable-model-invocation: true
 ---
 
-# Requirements QA
+# 📋 Requirements QA
 
 ## Principles
 - The source-of-truth file is declared in `.cursor/rules/project-context.mdc` or `AGENTS.md`. Read it first.

@@ -3,7 +3,7 @@ name: systematic-debugging
 description: Structured hypothesis → minimal reproduction → experiment → evidence → verdict loop. Prevents random trial-and-error. Triggered by "debug this", "I can't figure out why", "systematic-debugging".
 ---
 
-# Skill: systematic-debugging
+# 🐛 Skill: systematic-debugging
 
 ## Purpose
 Replace random trial-and-error with a disciplined loop: form a hypothesis, run the smallest possible experiment, collect evidence, and reach a verdict. Keeps debug sessions focused and reproducible.

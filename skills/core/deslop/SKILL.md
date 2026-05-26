@@ -3,7 +3,7 @@ name: deslop
 description: Strip redundant comments, dead variables/imports, and defensive try/catches wrapping trivially safe operations. Triggered by "deslop", "clean this up", "remove dead code".
 ---
 
-# Skill: deslop
+# 🧹 Skill: deslop
 
 ## Purpose
 Remove low-value noise from code: comments that narrate what the code already says, unused variables and imports, and try/catch blocks that add no recovery logic. Makes the codebase easier to read and maintain.

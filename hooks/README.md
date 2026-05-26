@@ -1,6 +1,16 @@
-# Hooks
+<div align="center">
 
-Hooks are shell scripts that Cursor executes automatically at specific lifecycle events. The team kit ships two hooks installed to `~/.cursor/` by `install.sh`.
+# 🪝 Hooks
+
+[![hooks](https://img.shields.io/badge/hooks-2%20active-3fb950?style=flat-square)](#installed-hooks)
+[![events](https://img.shields.io/badge/events-beforeShellExecution%20%7C%20sessionStart-06b6d4?style=flat-square)](#supported-events)
+
+Shell scripts Cursor executes automatically at lifecycle events.
+`git-guard.sh` enforces git safety. `session-context.sh` stamps every session with the kit version.
+
+</div>
+
+---
 
 ---
 

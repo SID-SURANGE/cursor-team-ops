@@ -1,6 +1,16 @@
-# Contributing to cursor-team-kit
+<div align="center">
 
-Thank you for considering a contribution. This kit is used by real teams in production, so the bar is intentional but not high.
+# 🤝 Contributing to cursor-team-kit
+
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-kit/pulls)
+[![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
+
+**This kit is used by real teams in production.**
+The bar is intentional — but not high. Start with a community skill.
+
+</div>
+
+---
 
 ---
 

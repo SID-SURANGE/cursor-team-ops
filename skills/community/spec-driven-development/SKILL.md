@@ -8,7 +8,7 @@ attribution: >
   No text was copied; this file is an original work.
 ---
 
-# Skill: spec-driven-development
+# 📐 Skill: spec-driven-development
 
 ## Purpose
 

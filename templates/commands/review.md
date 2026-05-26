@@ -1,4 +1,4 @@
-# /review
+# 🔎 /review
 
 Run a quick AI review pass on all local changes before human code review.
 

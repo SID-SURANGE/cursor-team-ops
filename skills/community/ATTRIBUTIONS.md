@@ -1,10 +1,16 @@
-# Community Skills — Attributions
+<div align="center">
 
-This file records attribution for community skills whose development was informed
-by external open-source work. All skills listed here are **independently written**
-original works — no text, code, or content was copied from the referenced sources.
-Attribution is provided out of respect for the community members whose published
-work informed the approach.
+# ⚖️ Community Skills — Attributions
+
+[![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](../../LICENSE)
+
+All community skills are **independently written original works.**
+This file records external open-source work that informed their approach —
+credited out of respect, not legal obligation.
+
+</div>
+
+---
 
 ---
 

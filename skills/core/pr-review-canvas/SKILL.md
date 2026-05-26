@@ -3,7 +3,7 @@ name: pr-review-canvas
 description: Group PR changes by purpose, flag risky sections, and produce a reviewer map so the reader doesn't parse raw diff. Triggered by "review canvas", "map this PR", "pr-review-canvas".
 ---
 
-# Skill: pr-review-canvas
+# 🗺️ Skill: pr-review-canvas
 
 ## Purpose
 Turn an unstructured diff into a structured review map: what changed, why it matters, where to look first, and what to be careful about. Helps reviewers focus attention rather than read everything.

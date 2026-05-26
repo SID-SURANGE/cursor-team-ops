@@ -3,7 +3,7 @@ name: writing-tests
 description: Produce a test structure for any language: what to cover (happy path, edge cases, error paths), how to name tests, and what not to test. Triggered by "write tests for this", "what should I test", "writing-tests".
 ---
 
-# Skill: writing-tests
+# 🧪 Skill: writing-tests
 
 ## Purpose
 Produce well-structured, meaningful tests — not coverage theatre. Focus on what can break, not what's obvious. Works for any language or framework.

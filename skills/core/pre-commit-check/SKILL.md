@@ -4,7 +4,7 @@ description: Check staged changes before creating a git commit. Reviews the diff
 disable-model-invocation: true
 ---
 
-# Pre-Commit Check
+# 🔍 Pre-Commit Check
 
 ## Run these in parallel
 1. `git status` — list staged and unstaged files.

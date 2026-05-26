@@ -4,7 +4,7 @@ description: Review a set of code or document changes for scope creep, conventio
 disable-model-invocation: true
 ---
 
-# Minimal Diff Review
+# 🔎 Minimal Diff Review
 
 ## Get the diff
 ```bash
