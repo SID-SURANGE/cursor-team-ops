@@ -167,6 +167,16 @@ Skills fire automatically when the agent detects a trigger phrase.
 | `writing-tests` | *"write tests for this"* / *"what should I test"* |
 | `architecture-decision-records` | *"create an ADR"* / *"document this decision"* |
 
+### Community skills
+
+| Skill | Triggered by |
+|-------|-------------|
+| `spec-driven-development` | *"write a spec"* / *"spec this out"* / *"define this first"* |
+| `security-hardening` | *"security review"* / *"harden this"* / *"check for vulnerabilities"* |
+| `ci-cd-pipeline` | *"set up CI"* / *"add GitHub Actions"* / *"fix the pipeline"* |
+
+See [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md) for full attribution details. [Contribute a skill →](CONTRIBUTING.md)
+
 > **Skills vs. commands** — Skills are auto-triggered by the agent. Commands (`/pr`, `/review`, `/fix-issue`) are typed manually with `/` in the agent input.
 
 ---

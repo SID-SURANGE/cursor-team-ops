@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.0 — 2026-05-26
+
+### Added
+- `skills/community/spec-driven-development` — write a spec before touching code; gated workflow (Specify → Plan → Implement)
+- `skills/community/security-hardening` — OWASP Top 10 coverage, boundary system, pre-deployment security checklist
+- `skills/community/ci-cd-pipeline` — quality gate pipeline setup, GitHub Actions config, deployment strategy, CI failure feedback loop
+- `skills/community/ATTRIBUTIONS.md` — legal attribution record for community skills informed by external MIT-licensed work
+
+### Changed
+- `README.md` — added community skills table with trigger phrases and attribution link
+- `session-context.sh` — updated skills list to include 3 new community skills
+
+---
+
 ## 1.2.0 — 2026-05-26
 
 ### Added
