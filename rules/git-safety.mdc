@@ -1,0 +1,49 @@
+---
+description: Git safety guardrails — no destructive commands, commit only when asked, safe message format
+alwaysApply: true
+---
+
+# Git Safety
+
+## Commit discipline
+- Never commit unless the user explicitly asks.
+- Never push to the remote unless the user explicitly asks.
+- Do not create an empty commit if there are no staged changes.
+
+## Amending commits
+- Avoid `git commit --amend`. Only amend HEAD when ALL of these are true:
+  1. User explicitly asked to amend, OR commit succeeded but pre-commit hook auto-modified files.
+  2. The commit was created by you in this conversation.
+  3. The commit has NOT been pushed to remote.
+- If a commit failed or was rejected, never amend — fix and create a new commit.
+
+## Destructive commands
+- Never run `git push --force` or `git push -f` to main/master without an explicit request. Warn the user if they ask.
+- Never run `git reset --hard` without explicit user confirmation.
+- Never use `--no-verify` or `--no-gpg-sign` unless the user explicitly requests it.
+- Never run interactive commands: `git rebase -i`, `git add -i`.
+- Never update git config.
+
+## Commit message format
+Always use a HEREDOC to avoid quoting issues:
+
+```bash
+git commit -m "$(cat <<'EOF'
+Imperative summary in present tense.
+
+Optional body explaining why.
+EOF
+)"
+```
+
+## Defensive checkpoints
+- Before starting a complex multi-file refactor or a long agent session, suggest creating a checkpoint:
+  ```bash
+  git add -A && git stash push -m "pre-<task> checkpoint"
+  # or commit on a clean branch if work is already staged
+  ```
+- This gives a safe rollback point without disrupting the branch history.
+- Never create the checkpoint automatically — suggest it and wait for user confirmation.
+
+## After every commit
+Run `git status` to confirm success before reporting done.

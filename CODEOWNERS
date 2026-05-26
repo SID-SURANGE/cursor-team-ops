@@ -1,0 +1,30 @@
+# CODEOWNERS — controls who must review PRs touching each area
+# Replace @yourusername with your actual GitHub handle.
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default: maintainer reviews everything
+*                           @SID-SURANGE
+
+# Rules layer — conservative, maintainer-only
+rules/                      @SID-SURANGE
+
+# Core skills — maintainer-only (promoted from community)
+skills/core/                @SID-SURANGE
+
+# Install scripts — run on contributor machines, high trust
+install.sh                  @SID-SURANGE
+install.ps1                 @SID-SURANGE
+bootstrap-project.sh        @SID-SURANGE
+
+# Hooks — shell execution, high trust
+hooks/                      @SID-SURANGE
+hooks.json                  @SID-SURANGE
+
+# Governance files
+LICENSE                     @SID-SURANGE
+CODEOWNERS                  @SID-SURANGE
+CONTRIBUTING.md             @SID-SURANGE
+
+# Community skills — covered by the `*` wildcard above (maintainer reviews all PRs).
+# Uncomment the line below only if you want to assign a different reviewer for community skill PRs.
+# skills/community/         @community-reviewer

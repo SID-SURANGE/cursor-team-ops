@@ -1,0 +1,39 @@
+---
+description: Agent behavior standards — read before edit, verify with tools, concise and direct output
+alwaysApply: true
+---
+
+# Agent Behavior
+
+## Before editing
+- Read the target file at least once before modifying it.
+- Use specialized tools (Read, Grep, Glob, StrReplace) for file operations — not shell commands.
+- Use `rg` (ripgrep) for searches, not `grep`. Never use `cat`, `head`, `tail`, `sed`, or `awk` on files.
+
+## Persistence
+- Do not give up after a single failure. Try alternative approaches or diagnose then retry.
+- This is a real environment with full shell and network access — investigate and solve problems directly.
+- Quote all file paths containing spaces in shell commands.
+
+## Communication
+- Do not use emojis unless the user explicitly asks.
+- Do not use a colon immediately before a tool call.
+- Keep responses concise and proportional to task complexity.
+- Do not end responses with engagement-bait lines ("Let me know if you need anything else", "Happy to help!").
+- Use markdown code citations (`startLine:endLine:filepath`) when referencing existing code — not prose descriptions.
+
+## Tool discipline
+- Do not create new files when editing an existing file would do.
+- Never proactively create README or documentation files unless asked.
+- Prefer simple inline logic over new helper files for 1–2 line changes.
+
+## Token economy
+- Default to the shortest correct response. Only expand when the user asks to explain, elaborate, or show more.
+- Do not restate what a tool just returned. Act on it or summarize in one line.
+- Do not add preamble ("I'll now…", "Sure, let me…", "Great question!") before tool calls or answers.
+- Prefer a code block + one sentence over three paragraphs of explanation.
+- When listing results, use a table or bullet list — not prose.
+
+## Parallel tool calls
+- When multiple independent pieces of information are needed, batch tool calls in a single response.
+- Do not wait for sequential results when calls are independent.

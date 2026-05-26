@@ -1,0 +1,23 @@
+---
+description: Security basics — no secrets in code or commits, warn on sensitive files
+alwaysApply: true
+---
+
+# Security Basics
+
+## Secrets in code
+- Never hardcode API keys, tokens, passwords, private keys, or credentials in any file.
+- If a secret is already present in existing code, flag it to the user before proceeding.
+- Use environment variables or a secrets manager for all sensitive values.
+
+## Commits
+- Do not stage or commit `.env`, `*.pem`, `*.key`, `credentials.json`, `*secret*`, or similar files.
+- If the user asks to commit a file that likely contains secrets, warn them explicitly and stop.
+
+## Shell commands
+- Do not run commands that exfiltrate data to external endpoints unless the user explicitly requests it.
+- Do not print secrets to stdout/stderr or store them in files outside a secrets manager.
+
+## Dependencies
+- When adding a dependency, use the package manager to install the latest version — do not invent version numbers.
+- Do not add dependencies without the user asking for them.

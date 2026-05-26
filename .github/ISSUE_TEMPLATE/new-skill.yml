@@ -1,0 +1,74 @@
+name: New Skill Proposal
+description: Propose a new community skill for the kit
+title: "[skill] "
+labels: ["skill-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a skill. Please fill in all sections before opening a PR.
+        Read [CONTRIBUTING.md](../../CONTRIBUTING.md) first.
+
+  - type: input
+    id: skill-name
+    attributes:
+      label: Skill name (kebab-case)
+      placeholder: e.g. generate-migration
+    validations:
+      required: true
+
+  - type: textarea
+    id: trigger-phrases
+    attributes:
+      label: Trigger phrases
+      description: What would a developer type to invoke this skill?
+      placeholder: |
+        - "generate migration"
+        - "create a db migration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What pain does this skill solve?
+      description: Describe the repetitive workflow or common mistake this skill addresses.
+      placeholder: Every time I need to create a DB migration I have to explain the naming convention, rollback strategy, and test requirements from scratch.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Rough steps the skill would follow
+      description: A bullet-point outline is fine — the full SKILL.md goes in the PR.
+      placeholder: |
+        1. Inspect the current schema / migration history
+        2. Generate the migration file with the correct naming convention
+        3. Scaffold up and down functions
+        4. Remind to add a test for the migration
+    validations:
+      required: true
+
+  - type: dropdown
+    id: generic
+    attributes:
+      label: Is this skill generic (no language or framework lock-in)?
+      options:
+        - "Yes — works for any stack"
+        - "Mostly — works for any stack with minor adaptation"
+        - "No — specific to a language/framework (belongs in a project overlay)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I checked existing core and community skills — this is not a duplicate
+          required: true
+        - label: I can test this on a real project before opening the PR
+          required: true
+        - label: I will write the SKILL.md myself (not copy from another source without crediting it)
+          required: true

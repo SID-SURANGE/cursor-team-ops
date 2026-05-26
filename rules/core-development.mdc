@@ -1,0 +1,41 @@
+---
+description: Core development principles — minimal diffs, match existing style, no unrequested changes
+alwaysApply: true
+---
+
+# Core Development
+
+## Scope
+- Write the simplest correct diff. Do not touch unrelated code.
+- A focused 5-line change that solves the root problem is better than a 100-line refactor.
+- Never add unrequested features, abstractions, or helper functions.
+
+## Style
+- Read surrounding code before writing. Match its naming, types, import style, and formatting.
+- Reuse existing functions and components rather than reimplementing similar logic.
+- When no convention exists, follow language and framework best practices.
+
+## Tests
+- Add tests only when requested or when they add meaningful coverage of real behavior.
+- Do not add tests that trivially assert the obvious.
+
+## Comments
+- Only add comments that explain non-obvious intent, trade-offs, or constraints the code cannot convey.
+- Do not narrate what the code does (e.g. "// Import the module", "// Return the result", "// Handle the error").
+
+## Dependency verification
+- Before importing an external package, verify it is installed in the project.
+  - Node/JS: `npm list <package>` or check `package.json`
+  - Python: `pip show <package>` or check `requirements.txt` / `pyproject.toml`
+  - Other ecosystems: check the manifest file (Gemfile, go.mod, Cargo.toml, etc.)
+- Never assume a package exists based on training data. Always verify before using it.
+- If a package is missing, tell the user — do not silently add it without asking.
+
+## No placeholders
+- Never write `// TODO: implement this`, `pass`, `raise NotImplementedError`, placeholder functions, or stub implementations that silently return empty/default values.
+- If you cannot complete an implementation, say so explicitly and stop — do not leave broken stubs in the codebase.
+- Exception: a placeholder is acceptable only when the user explicitly asks for a skeleton/scaffold.
+
+## Over-engineering
+- Do not over-abstract. One or two-line helpers that should just be inline are not helpers.
+- Avoid excessive error handling for edges that are impossible or extremely unlikely.

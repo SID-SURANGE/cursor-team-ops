@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "./hooks/git-guard.sh",
+        "matcher": "git|rm\\s+-r",
+        "failClosed": false
+      }
+    ],
+    "sessionStart": [
+      {
+        "command": "./hooks/session-context.sh",
+        "failClosed": false
+      }
+    ]
+  }
+}

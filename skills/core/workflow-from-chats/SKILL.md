@@ -1,0 +1,64 @@
+---
+name: workflow-from-chats
+description: Scan the recent conversation for a repeated prompt pattern and produce a ready-to-commit SKILL.md. Triggered by "make this a skill", "extract this workflow", "save this as a skill".
+---
+
+# Skill: workflow-from-chats
+
+## Purpose
+Turn a repeated or valuable conversation pattern into a reusable, committable `SKILL.md` so the team never has to re-explain the same workflow.
+
+## Steps
+
+### 1. Identify the pattern
+- Review the recent conversation (or the user-selected excerpt).
+- Look for:
+  - A multi-step workflow the user walked the agent through manually.
+  - A prompt the user re-typed with minor variations.
+  - A sequence of tool calls that produced a consistently useful outcome.
+- If ambiguous, ask: "Which part of this conversation should become the skill?"
+
+### 2. Name and classify
+- Choose a short kebab-case name (e.g. `fix-slow-query`, `generate-migration`).
+- Pick a trigger phrase that would naturally recall this skill in future sessions.
+- Identify the skill's scope: does it belong in the team kit (`~/.cursor/skills/`) or the current project (`.cursor/skills/`)?
+
+### 3. Draft the SKILL.md
+Produce a file with this structure:
+
+```markdown
+---
+name: <kebab-case-name>
+description: <One sentence. Include the trigger phrases.>
+---
+
+# Skill: <name>
+
+## Purpose
+<Why this skill exists — the pain it avoids.>
+
+## Trigger phrases
+- "<phrase 1>"
+- "<phrase 2>"
+
+## Steps
+<Numbered steps extracted from the conversation. Be prescriptive, not descriptive.>
+
+## Output
+<What the skill produces — files created, commands run, verdicts returned.>
+
+## Example
+<Optional: a minimal before/after or sample invocation.>
+```
+
+### 4. Validate before writing
+- Confirm the steps are reproducible without the original conversation context.
+- Remove any project-specific details if the skill targets `~/.cursor/skills/`.
+- Ensure trigger phrases are distinct from existing skills.
+
+### 5. Write and report
+- Write the file to the correct location.
+- Report: skill name, file path, trigger phrases, and one-line description.
+
+## Output
+A single `SKILL.md` ready to commit.

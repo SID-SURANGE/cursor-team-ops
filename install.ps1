@@ -1,0 +1,114 @@
+# install.ps1 — installs cursor-team-kit into $HOME\.cursor\ on Windows
+# Usage: .\install.ps1
+# Re-run after git pull to update.
+#
+# Symlinks are preferred (requires Developer Mode on Windows 10+ or admin rights).
+# Falls back to copying files if symlink creation fails.
+#
+# NOTE: Hook scripts (git-guard.sh, session-context.sh) are bash scripts.
+#       They only work with WSL or Git Bash. If you are on native PowerShell
+#       without WSL, rules and skills will be active but hooks will not fire.
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+$KitDir   = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$CursorDir = Join-Path $HOME ".cursor"
+
+$version = (Get-Content (Join-Path $KitDir "VERSION") -Raw).Trim()
+Write-Host "Installing Cursor team kit v$version from $KitDir"
+Write-Host ""
+
+# ── Helper: try symlink, fall back to copy ────────────────────────────────────
+function Install-Item {
+    param(
+        [string]$Source,
+        [string]$Target,
+        [string]$Label,
+        [bool]$IsDir = $false
+    )
+
+    # Remove existing target
+    if (Test-Path $Target) {
+        Remove-Item $Target -Recurse -Force
+    }
+
+    $linked = $false
+    try {
+        if ($IsDir) {
+            New-Item -ItemType Junction -Path $Target -Target $Source -ErrorAction Stop | Out-Null
+        } else {
+            New-Item -ItemType SymbolicLink -Path $Target -Target $Source -ErrorAction Stop | Out-Null
+        }
+        $linked = $true
+    } catch {
+        # Symlink failed — fall back to copy
+    }
+
+    if (-not $linked) {
+        if ($IsDir) {
+            Copy-Item -Path $Source -Destination $Target -Recurse -Force
+        } else {
+            Copy-Item -Path $Source -Destination $Target -Force
+        }
+        Write-Host "  [$Label] $(Split-Path -Leaf $Target) (copied)"
+    } else {
+        Write-Host "  [$Label] $(Split-Path -Leaf $Target) (linked)"
+    }
+}
+
+# ── Directories ───────────────────────────────────────────────────────────────
+$null = New-Item -ItemType Directory -Force -Path (Join-Path $CursorDir "rules")
+$null = New-Item -ItemType Directory -Force -Path (Join-Path $CursorDir "skills")
+$null = New-Item -ItemType Directory -Force -Path (Join-Path $CursorDir "hooks")
+
+# ── Rules ─────────────────────────────────────────────────────────────────────
+Get-ChildItem (Join-Path $KitDir "rules") -Filter "*.mdc" | ForEach-Object {
+    $target = Join-Path $CursorDir "rules" $_.Name
+    Install-Item -Source $_.FullName -Target $target -Label "rule"
+}
+
+# ── Skills (core + community, both installed flat into $HOME\.cursor\skills\) ─
+foreach ($tier in @("core", "community")) {
+    $tierPath = Join-Path $KitDir "skills\$tier"
+    if (Test-Path $tierPath) {
+        Get-ChildItem $tierPath -Directory | ForEach-Object {
+            $target = Join-Path $CursorDir "skills" $_.Name
+            Install-Item -Source $_.FullName -Target $target -Label "skill/$tier" -IsDir $true
+        }
+    }
+}
+
+# ── hooks.json ────────────────────────────────────────────────────────────────
+$hooksJsonSrc = Join-Path $KitDir "hooks.json"
+$hooksJsonDst = Join-Path $CursorDir "hooks.json"
+if (Test-Path $hooksJsonDst) {
+    # Only back up if the existing file is NOT our own kit file (avoids overwriting
+    # the backup on every re-run). Compare content hashes to detect foreign file.
+    $dstHash = (Get-FileHash $hooksJsonDst -Algorithm SHA256).Hash
+    $srcHash = (Get-FileHash $hooksJsonSrc -Algorithm SHA256).Hash
+    if ($dstHash -ne $srcHash) {
+        $backup = "$hooksJsonDst.bak"
+        Copy-Item $hooksJsonDst $backup -Force
+        Write-Host "  [hooks] Backed up existing hooks.json → hooks.json.bak"
+    }
+}
+Install-Item -Source $hooksJsonSrc -Target $hooksJsonDst -Label "hooks"
+
+# ── Hook scripts (bash — only useful under WSL / Git Bash) ────────────────────
+Get-ChildItem (Join-Path $KitDir "hooks") -Filter "*.sh" | ForEach-Object {
+    $target = Join-Path $CursorDir "hooks" $_.Name
+    Install-Item -Source $_.FullName -Target $target -Label "hook"
+}
+
+# ── Record version ────────────────────────────────────────────────────────────
+Copy-Item (Join-Path $KitDir "VERSION") (Join-Path $CursorDir ".team-kit-version") -Force
+
+Write-Host ""
+Write-Host "Done. Team kit v$version installed to $HOME\.cursor\"
+Write-Host "Next: in each repo, run bootstrap-project.sh and sync-project.ps1 so rules/skills"
+Write-Host "      appear in Cursor Settings. Then reload Cursor."
+Write-Host ""
+Write-Host "Note: Hook scripts require WSL or Git Bash. On native PowerShell,"
+Write-Host "      hooks (git-guard, session-context) will not fire without Git Bash."
+Write-Host ""

@@ -1,0 +1,27 @@
+---
+description: Documentation standards — concise prose, no invented requirements, cite existing content
+globs: **/*.md,**/*.mdc
+alwaysApply: false
+---
+
+# Documentation
+
+## Tone
+- Write precisely and concisely. Avoid filler phrases ("As mentioned above", "It is worth noting that").
+- Use complete sentences. Avoid telegraphic bullet chains without context.
+- Use markdown links for URLs and file paths — give the full string, do not shorten or elide segments.
+
+## Requirements and BRD work
+- Do not invent missing requirements or assumptions. Surface gaps as open questions instead.
+- When source documents conflict with each other, call out the conflict explicitly — do not silently resolve it.
+- Update the existing source-of-truth file; do not create a new duplicate summary file.
+- If a file has open questions, surface them before giving a final answer.
+
+## Code references
+- Use `startLine:endLine:filepath` citation blocks when referencing existing code.
+- Do not describe code in prose when a direct citation is possible.
+
+## File creation
+- Never proactively create README or documentation files unless explicitly asked.
+- Prefer editing an existing file over creating a new one.
+- Do not use `---` horizontal rules as decoration; use them only for semantic section breaks.

@@ -1,0 +1,80 @@
+name: Bug Report
+description: Report a broken skill, hook, rule, or install script
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill in as much detail as possible. Vague reports are hard to act on.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which component is broken?
+      options:
+        - "install.sh"
+        - "install.ps1"
+        - "A core skill"
+        - "A community skill"
+        - "A rule (.mdc file)"
+        - "A hook (git-guard.sh / session-context.sh)"
+        - "bootstrap-project.sh"
+        - "Other"
+    validations:
+      required: true
+
+  - type: input
+    id: component-name
+    attributes:
+      label: Component name (if applicable)
+      placeholder: e.g. skills/core/fix-merge-conflicts
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - "macOS"
+        - "Linux"
+        - "Windows — WSL"
+        - "Windows — Git Bash"
+        - "Windows — native PowerShell"
+    validations:
+      required: true
+
+  - type: input
+    id: kit-version
+    attributes:
+      label: Kit version
+      description: Run `cat ~/.cursor/.team-kit-version`
+      placeholder: e.g. 1.1.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Include the exact error message or unexpected behaviour.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `bash install.sh`
+        2. Open Cursor in a repo with a merge conflict
+        3. Type "fix merge conflicts"
+        4. Observe...
+    validations:
+      required: true
