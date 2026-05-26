@@ -1,309 +1,226 @@
-# cursor-team-kit
+<div align="center">
 
-**The team-ops layer for Cursor.** Consistent agent rules, skills, and git guardrails — across your entire engineering team, across every repo, installed in under 5 minutes.
+# ⚙️ cursor-team-kit
 
-Most Cursor setups are solo configurations. This kit solves a different problem: *how do you roll out Cursor to a whole team so everyone gets the same guardrails, the same skills, and the same commit discipline — and keeps them in sync as the team evolves?*
+**The team-ops layer for Cursor AI**
 
-> **Not just another rules collection.** cursor-team-kit is a versioned, governed distribution system with machine install, per-repo sync, enforced git hooks, and a skill library with a quality bar. See [TEAMS.md](TEAMS.md) for real-world team setups.
+Roll out consistent agent rules, skills, and git guardrails across your entire engineering team — in under 5 minutes.
 
----
+[![Version](https://img.shields.io/badge/version-1.2.0-6366f1?style=flat-square)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-06b6d4?style=flat-square)](#install-once-per-machine)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](CONTRIBUTING.md)
 
-## Who this is for
-
-| You are... | This kit gives you... |
-|------------|----------------------|
-| An **engineering team lead** adopting Cursor across your team | One command per developer to get everyone on identical guardrails |
-| A **senior developer** tired of inconsistent agent behaviour across repos | A versioned baseline you can `git pull` to update everywhere |
-| A **solo developer** who wants production-grade agent discipline | 14 curated skills and 5 always-on rules — no noise, no bloat |
+</div>
 
 ---
 
-## What makes this different
+## Why this exists
 
-| Other kits | cursor-team-kit |
-|-----------|-----------------|
-| Files to copy manually | `install.sh` + `sync-project.sh` — scripted, repeatable |
-| No version tracking | `~/.cursor/.team-kit-version` — every machine knows what it's running |
-| No enforcement | `git-guard.sh` hook — *blocks* force-push to main, *warns* on hard reset |
-| Bash-only | Full **Windows PowerShell** path (`install.ps1`, `sync-project.ps1`) |
-| Dump of 1,000+ skills | 14 curated skills with guardrails, output formats, and trigger phrases |
-| Individual developer focus | Team governance: CODEOWNERS, CHANGELOG, promotion pipeline |
+Most Cursor setups are solo configurations — copied rules, hand-pasted skills, no enforcement. cursor-team-kit solves the team problem:
+
+```
+git clone cursor-team-kit          →   bash install.sh          →   bash sync-project.sh
+     ↓                                      ↓                              ↓
+ get the kit                      rules + skills on             same setup in every
+ on your machine                  your machine                  repo your team uses
+```
+
+One `git pull` on the kit keeps every developer and every repo in sync.
+
+---
+
+## What's included
+
+| Layer | What it does |
+|-------|-------------|
+| 🛡️ **5 rules** | Always-on agent guardrails — minimal diffs, git safety, no secrets, doc standards |
+| 🧠 **14 skills** | On-demand workflows — debugging, PR creation, test writing, ADRs, and more |
+| 🪝 **2 hooks** | `git-guard.sh` blocks force-push to main · `session-context.sh` injects kit version |
+| ⚡ **3 commands** | `/pr` · `/review` · `/fix-issue` — starter slash commands for every repo |
+| 📋 **Templates** | `AGENTS.md` + `project-context.mdc` scaffolded into every new repo |
+
+---
+
+## How it works
+
+```
+~/.cursor/                          your-repo/.cursor/
+├── rules/                          ├── rules/
+│   ├── core-development.mdc        │   ├── core-development.mdc   ← team rules
+│   ├── git-safety.mdc              │   ├── git-safety.mdc
+│   ├── agent-behavior.mdc          │   ├── agent-behavior.mdc
+│   ├── security-basics.mdc         │   ├── security-basics.mdc
+│   └── documentation.mdc           │   ├── documentation.mdc
+├── skills/  (14 skills)            │   └── project-context.mdc    ← yours to edit
+├── hooks/                          ├── skills/  (14 skills)
+│   ├── git-guard.sh                ├── commands/
+│   └── session-context.sh          │   ├── pr.md
+├── hooks.json                      │   ├── review.md
+└── .team-kit-version               │   └── fix-issue.md
+                                    └── hooks.json  (optional)
+      ↑ install.sh                        ↑ sync-project.sh
+```
 
 ---
 
 ## Quick start
 
-Cursor has **two install locations**. You need **both** for the full experience:
+### 1 — Install on your machine (once)
 
-| Step | Script | Installs to | What you get |
-|------|--------|-------------|--------------|
-| **1. Machine** (once) | `install.sh` / `install.ps1` | `~/.cursor/` | Hooks + global agent context |
-| **2. Per repo** | `bootstrap-project.sh` + `sync-project.sh` | `<repo>/.cursor/` | Rules, skills, and commands visible in Settings |
-
+**macOS / Linux / Git Bash on Windows**
 ```bash
-# Step 1 — run once per machine
 git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
 cd ~/cursor-team-kit
-bash install.sh          # macOS / Linux / Git Bash on Windows
-# or: .\install.ps1      # Windows native PowerShell
-
-# Step 2 — run in each repo
-cd /path/to/your/repo
-bash ~/cursor-team-kit/bootstrap-project.sh
-bash ~/cursor-team-kit/sync-project.sh
-# then reload Cursor: Ctrl+Shift+P → Developer: Reload Window
+bash install.sh
 ```
 
-See [ONBOARDING.md](ONBOARDING.md) for the full per-developer checklist with verification steps.
+**Windows — native PowerShell**
+```powershell
+git clone https://github.com/SID-SURANGE/cursor-team-kit $HOME\cursor-team-kit
+cd $HOME\cursor-team-kit
+.\install.ps1
+```
+
+> Restart Cursor after install.
+
+### 2 — Set up a repo (per project)
+
+```bash
+cd /path/to/your/repo
+bash ~/cursor-team-kit/bootstrap-project.sh   # scaffolds AGENTS.md + commands
+bash ~/cursor-team-kit/sync-project.sh         # copies rules + skills into .cursor/
+```
+
+```powershell
+# Windows PowerShell
+bash $HOME\cursor-team-kit\bootstrap-project.sh
+.\$HOME\cursor-team-kit\sync-project.ps1
+```
+
+Then reload Cursor → `Ctrl+Shift+P` → **Developer: Reload Window** → check **Settings → Rules, Commands**.
+
+### 3 — Commit and share with your team
+
+```bash
+# Edit these for your project first
+nano AGENTS.md
+nano .cursor/rules/project-context.mdc
+
+git add .cursor/ AGENTS.md
+git commit -m "chore: add cursor-team-kit baseline"
+git push
+# teammates get it on next git pull — no install needed beyond step 1
+```
 
 ---
 
 ## Rolling out to a team
 
-```bash
-# Team lead does this once, commits the result
-cd /path/to/your/repo
-bash ~/cursor-team-kit/bootstrap-project.sh
-bash ~/cursor-team-kit/sync-project.sh
-# Edit AGENTS.md and .cursor/rules/project-context.mdc for your project
-git add .cursor/ AGENTS.md
-git commit -m "chore: add cursor-team-kit baseline"
-git push
-
-# Each developer does this once on their machine
-git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
-bash ~/cursor-team-kit/install.sh
-# then git pull in the repo — .cursor/ arrives via normal git sync
+```
+Team lead                           Each developer
+──────────                          ──────────────
+1. git clone cursor-team-kit        1. git clone cursor-team-kit
+2. bootstrap-project.sh + sync      2. bash install.sh  (once)
+3. edit AGENTS.md                   3. git pull  (gets .cursor/ from repo)
+4. git push                         4. reload Cursor  ✓
 ```
 
-After that, keeping everyone in sync is just `git pull` + `bash install.sh` when the kit releases a new version.
-
-See [TEAMS.md](TEAMS.md) for example setups for a web app team, an API team, and a monorepo.
+See [TEAMS.md](TEAMS.md) for complete examples: web app team, API team, monorepo.
 
 ---
 
-## What's in the kit
+## Rules
 
-| Layer | Machine (`install.sh`) | Per repo (`bootstrap` + `sync`) |
-|-------|------------------------|----------------------------------|
-| **Rules** | `~/.cursor/rules/*.mdc` | `.cursor/rules/*.mdc` (incl. `project-context.mdc`) |
-| **Skills** | `~/.cursor/skills/<name>/` | `.cursor/skills/<name>/` |
-| **Hooks** | `~/.cursor/hooks.json` + scripts | Optional project `hooks.json` |
-| **Commands** | — | `.cursor/commands/*.md` (`/pr`, `/review`, `/fix-issue`) |
-| **Templates** | — | `AGENTS.md` at repo root |
-
----
-
-## Rules (always-on)
-
-Five rules apply to every file in every session. They are intentionally minimal — each one was kept because it changes agent behaviour in a measurable way.
+Five rules apply to every file in every session — no configuration needed.
 
 | Rule | Enforces |
 |------|---------|
-| `core-development` | Minimal diffs · match existing style · no unrequested changes · no placeholders |
-| `git-safety` | No force-push main · no `--no-verify` · commit only when asked · HEREDOC message format |
-| `agent-behavior` | Read before edit · use tools not shell · concise output · no preamble |
-| `security-basics` | No secrets in code or commits · warn before staging sensitive files |
+| `core-development` | Minimal diffs · match style · no placeholders · no over-engineering |
+| `git-safety` | No force-push main · no `--no-verify` · commit only when asked |
+| `agent-behavior` | Read before edit · use tools · concise output · no preamble |
+| `security-basics` | No secrets in code · warn before staging sensitive files |
 | `documentation` | Precise prose · no invented requirements · cite existing content |
 
 ---
 
-## Skills (on-demand)
+## Skills
 
-Skills are loaded automatically when the agent detects a matching trigger phrase. No slash command needed — just work naturally.
+Skills fire automatically when the agent detects a trigger phrase.
 
-### Core skills (curated, maintainer-reviewed)
+| Skill | Say this to trigger it |
+|-------|----------------------|
+| `discover-repo` | *"explore this codebase"* / *"walk me through this project"* |
+| `pre-commit-check` | *"commit this"* / *"create a commit"* |
+| `pr-summary` | *"open a PR"* / *"push and PR"* |
+| `minimal-diff-review` | *"review my changes"* |
+| `requirements-qa` | *(auto — when working in BRD / docs folders)* |
+| `workflow-from-chats` | *"make this a skill"* / *"extract this workflow"* |
+| `verify-this` | *"verify this"* / *"prove this works"* |
+| `pr-review-canvas` | *"review canvas"* / *"map this PR"* |
+| `deslop` | *"deslop"* / *"remove dead code"* |
+| `fix-merge-conflicts` | *"fix merge conflicts"* |
+| `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* |
+| `systematic-debugging` | *"debug this"* / *"I can't figure out why"* |
+| `writing-tests` | *"write tests for this"* / *"what should I test"* |
+| `architecture-decision-records` | *"create an ADR"* / *"document this decision"* |
 
-| Skill | Triggered by |
-|-------|-------------|
-| `discover-repo` | "explore this codebase", "walk me through this project" |
-| `pre-commit-check` | "commit this", "create a commit", "git commit" |
-| `pr-summary` | "open a PR", "create a pull request", "push and PR" |
-| `minimal-diff-review` | "review my changes", "review this diff" |
-| `requirements-qa` | Working in BRD / docs / requirements folders |
-| `workflow-from-chats` | "make this a skill", "extract this workflow" |
-| `verify-this` | "verify this", "prove this works" |
-| `pr-review-canvas` | "review canvas", "map this PR" |
-| `deslop` | "deslop", "clean this up", "remove dead code" |
-| `fix-merge-conflicts` | "fix merge conflicts", "resolve conflicts" |
-| `sync-docs-after-edit` | "sync docs", "did my change break any docs?" |
-| `systematic-debugging` | "debug this", "I can't figure out why" |
-| `writing-tests` | "write tests for this", "what should I test" |
-| `architecture-decision-records` | "create an ADR", "document this decision" |
-
-### Community skills
-
-_None yet. [Contribute one →](CONTRIBUTING.md)_
-
-### Skills vs. commands — what's the difference?
-
-- **Skills** are loaded automatically by the agent when it detects a trigger phrase. The developer does not type anything special.
-- **Commands** (`.cursor/commands/*.md`) are invoked manually with `/command-name` in the agent input. Use them for explicit, user-initiated workflows.
+> **Skills vs. commands** — Skills are auto-triggered by the agent. Commands (`/pr`, `/review`, `/fix-issue`) are typed manually with `/` in the agent input.
 
 ---
 
-## Slash commands (per-project)
-
-`bootstrap-project.sh` copies three starter commands into every new repo:
-
-| Command | What it does |
-|---------|-------------|
-| `/pr` | Commit, push, and open a PR with a generated description |
-| `/review` | Pre-PR diff review: secrets, debug code, scope creep |
-| `/fix-issue [number]` | Fetch a GitHub issue, implement a fix, open a PR |
-
-Edit or delete them per-project. Add your own in `.cursor/commands/<name>.md`.
-
----
-
-## Hooks (automatic enforcement)
+## Hooks
 
 | Hook | Event | Behaviour |
 |------|-------|-----------|
-| `git-guard.sh` | `beforeShellExecution` | Blocks force-push to main · warns on hard reset / `--no-verify` / root `rm -rf` |
-| `session-context.sh` | `sessionStart` | Injects kit version + active rules/skills list as session context |
+| `git-guard.sh` | `beforeShellExecution` | **Blocks** force-push to main/master · **warns** on hard reset, `--no-verify`, root `rm -rf` |
+| `session-context.sh` | `sessionStart` | Injects kit version + active rules/skills list at session start |
 
-See [hooks/README.md](hooks/README.md) for the full schema reference, response format, how to test hooks locally, and how to add project-level hooks.
+See [hooks/README.md](hooks/README.md) for schema reference, testing guide, and how to add project-level hooks.
 
 ---
 
-## Install details
-
-### macOS / Linux
+## Keeping in sync
 
 ```bash
-git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
-cd ~/cursor-team-kit
-bash install.sh
-# Restart Cursor
+# When the kit releases a new version
+cd ~/cursor-team-kit && git pull
+bash install.sh                          # update your machine
+bash sync-project.sh /path/to/your/repo  # update the repo
+git add .cursor/ && git commit -m "chore: sync cursor-team-kit to vX.Y.Z" && git push
+# teammates get the update on next git pull
 ```
 
-`install.sh` symlinks rules, skills, and hooks into `~/.cursor/`. Re-run after `git pull` to update.
-
-### Windows — Git Bash (recommended)
-
-```bash
-git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
-cd ~/cursor-team-kit
-bash install.sh
-# Restart Cursor
-```
-
-> Use **Git for Windows** Bash (e.g. `C:\Program Files\Git\bin\bash.exe`), not WSL `bash`. WSL uses a different `$HOME` and files may land in the wrong place.
-
-### Windows — native PowerShell
-
-```powershell
-git clone https://github.com/SID-SURANGE/cursor-team-kit $HOME\cursor-team-kit
-cd $HOME\cursor-team-kit
-.\install.ps1
-# Restart Cursor
-```
-
-`install.ps1` creates symlinks when Developer Mode is enabled (Windows 10+); otherwise copies files. Re-run after `git pull` to refresh.
-
-> Hooks are bash scripts. On native Windows without Git Bash or WSL, hooks will not fire. Use the Git Bash path for full hook support.
+The `session-context.sh` hook prints the active kit version at every session start — mismatches are visible immediately.
 
 ---
 
-## Bootstrap a new repo
+## Cursor Settings UI note
 
-```bash
-cd /path/to/your/repo
-bash ~/cursor-team-kit/bootstrap-project.sh   # creates AGENTS.md, project-context.mdc, commands/
-bash ~/cursor-team-kit/sync-project.sh         # copies rules + skills into .cursor/
-# Reload Cursor
-```
-
-**PowerShell:**
-
-```powershell
-cd C:\path\to\your\repo
-bash $HOME\cursor-team-kit\bootstrap-project.sh
-.\$HOME\cursor-team-kit\sync-project.ps1
-# Reload Cursor
-```
-
-`bootstrap-project.sh` creates (if not present):
-- `AGENTS.md` — project identity, key paths, commands, conventions
-- `.cursor/rules/project-context.mdc` — project-specific agent rule
-- `.cursor/commands/` — starter slash commands
-
-`sync-project.sh` copies team rules and skills into `.cursor/`. Safe to re-run after kit updates.
-
-Commit `.cursor/` and `AGENTS.md` so the whole team shares the same setup via `git pull`.
-
----
-
-## Keeping the kit up to date
-
-```bash
-cd ~/cursor-team-kit
-git pull
-bash install.sh                              # refresh ~/.cursor/ on this machine
-bash sync-project.sh /path/to/your/repo      # refresh repo .cursor/ (repeat per repo)
-# Reload Cursor
-```
-
-Version is recorded at `~/.cursor/.team-kit-version` and printed at every session start by the `session-context.sh` hook.
-
----
-
-## Project file layout
-
-After `bootstrap-project.sh` + `sync-project.sh`, a repo looks like:
-
-```
-your-repo/
-  AGENTS.md                          ← what this repo is; read before making changes
-  .cursor/
-    rules/
-      core-development.mdc           ← team rule (from sync-project)
-      git-safety.mdc
-      agent-behavior.mdc
-      security-basics.mdc
-      documentation.mdc
-      project-context.mdc            ← project-specific rule (from bootstrap, edit this)
-    skills/                          ← 14 core skills (from sync-project)
-    commands/
-      pr.md                          ← /pr command
-      review.md                      ← /review command
-      fix-issue.md                   ← /fix-issue command
-    hooks.json                       ← optional project-level hooks
-```
-
----
-
-## Cursor Settings UI vs `~/.cursor/`
-
-**Settings → Rules, Commands** shows **project** files only (`<repo>/.cursor/`). It does not enumerate `~/.cursor/rules/` or `~/.cursor/skills/` even after a successful `install.sh`. Global files still influence the agent — they just won't appear in the panel. Run `sync-project.sh` in the repo if you want rules and skills visible in Settings.
+**Settings → Rules, Commands** shows **project** files only (`<repo>/.cursor/`). Machine-level files (`~/.cursor/`) are active but not listed in the panel — this is expected. Run `sync-project.sh` in the repo to make rules and skills appear in Settings.
 
 ---
 
 ## Contributing
 
-Community skills are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for the quality bar, SKILL.md format, and submission process.
+Community skills are welcome. Rules, hooks, and install scripts are maintainer-only.
 
-Rules, hooks, and install scripts are maintainer-only.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the quality bar, `SKILL.md` format, and submission steps.
 
 ---
 
 ## Governance
 
-- Rules and core skill changes: PR + `CHANGELOG.md` entry, maintainer approval.
-- Community skills: PR reviewed against the quality bar in `CONTRIBUTING.md`.
-- Quarterly review: trim rules the agent ignores; promote community skills with a proven track record.
-- Version is tagged; `sessionStart` hook prints the active version at the start of every session.
+- **Core changes** — PR + `CHANGELOG.md` entry, maintainer approval
+- **Community skills** — PR reviewed against the quality bar in `CONTRIBUTING.md`
+- **Quarterly review** — trim rules the agent ignores; promote proven community skills to core
+- **Versioning** — tagged releases; `sessionStart` hook prints the active version
 
 ---
 
 ## Attributions
 
-### Inspired-by credit
-
-The workflow patterns behind three skills were inspired by the [awesome-cursor-skills](https://github.com/spencerpauly/awesome-cursor-skills) community repository (Spencer Pauly and contributors). The SKILL.md files in this kit are independently written and do not reproduce text from that source; the underlying engineering methods (structured debugging, test structure, ADR format) are generic practices that predate it.
-
-> `awesome-cursor-skills` does not publish an explicit license. We credit the community work as inspiration, not a copy. If you are the maintainer and would prefer different attribution, please open an issue.
+Workflow patterns behind three skills were inspired by [awesome-cursor-skills](https://github.com/spencerpauly/awesome-cursor-skills) (Spencer Pauly and contributors). SKILL.md files are independently written and do not reproduce text from that source.
 
 | Skill | Inspired by |
 |-------|------------|
@@ -311,8 +228,4 @@ The workflow patterns behind three skills were inspired by the [awesome-cursor-s
 | `writing-tests` | awesome-cursor-skills community patterns |
 | `architecture-decision-records` | awesome-cursor-skills community patterns |
 
-All other content in this kit is original.
-
-### Cursor
-
-This kit is an **unofficial** community project. It is not affiliated with or endorsed by Anysphere (Cursor). "Cursor" is a trademark of Anysphere, Inc.
+> This kit is **unofficial** and not affiliated with or endorsed by Anysphere (Cursor). "Cursor" is a trademark of Anysphere, Inc.
