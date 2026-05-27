@@ -26,6 +26,7 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md).
 ## Promoting to core
 
 A community skill may be promoted to `skills/core/` after:
+
 - 3+ months in `skills/community/` with no reported issues
 - Positive feedback from multiple teams
 - Review and approval by a maintainer

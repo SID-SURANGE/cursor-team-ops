@@ -108,7 +108,7 @@ By submitting a PR, you confirm:
 
 Add this line to your PR description:
 
-```
+```text
 Signed-off-by: Your Name <your@email.com>
 ```
 
@@ -117,6 +117,7 @@ Signed-off-by: Your Name <your@email.com>
 ## Promoting a community skill to core
 
 Community skills may be nominated for promotion to `skills/core/` after:
+
 - 3+ months in `skills/community/` with no open bugs
 - Reported as useful by at least two independent teams
 - Clean, minimal SKILL.md (no framework-specific branches, no external dependencies)

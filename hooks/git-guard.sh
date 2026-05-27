@@ -17,14 +17,12 @@ extract_command() {
   # Disable exit-on-error for this function body only
   set +e
   if command -v python3 &>/dev/null; then
-    result=$(python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('command',''))" <<< "$raw" 2>/dev/null)
-    if [ $? -eq 0 ] && [ -n "$result" ]; then
+    if result=$(python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('command',''))" <<< "$raw" 2>/dev/null) && [ -n "$result" ]; then
       echo "$result"; set -e; return
     fi
   fi
   if command -v python &>/dev/null; then
-    result=$(python -c "import json,sys; print(json.loads(sys.stdin.read()).get('command',''))" <<< "$raw" 2>/dev/null)
-    if [ $? -eq 0 ] && [ -n "$result" ]; then
+    if result=$(python -c "import json,sys; print(json.loads(sys.stdin.read()).get('command',''))" <<< "$raw" 2>/dev/null) && [ -n "$result" ]; then
       echo "$result"; set -e; return
     fi
   fi

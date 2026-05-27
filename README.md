@@ -21,7 +21,7 @@ Roll out consistent agent rules, skills, and git guardrails across your entire e
 
 Most Cursor setups are solo configurations — copied rules, hand-pasted skills, no enforcement. cursor-team-kit solves the team problem:
 
-```
+```text
 git clone cursor-team-kit          →   bash install.sh          →   bash sync-project.sh
      ↓                                      ↓                              ↓
  get the kit                      rules + skills on             same setup in every
@@ -46,7 +46,7 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 
 ## How it works
 
-```
+```text
 ~/.cursor/                          your-repo/.cursor/
 ├── rules/                          ├── rules/
 │   ├── core-development.mdc        │   ├── core-development.mdc   ← team rules
@@ -71,6 +71,7 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 ### 1 — Install on your machine (once)
 
 **macOS / Linux / Git Bash on Windows**
+
 ```bash
 git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
 cd ~/cursor-team-kit
@@ -78,6 +79,7 @@ bash install.sh
 ```
 
 **Windows — native PowerShell**
+
 ```powershell
 git clone https://github.com/SID-SURANGE/cursor-team-kit $HOME\cursor-team-kit
 cd $HOME\cursor-team-kit
@@ -119,7 +121,7 @@ git push
 
 ## Rolling out to a team
 
-```
+```text
 Team lead                           Each developer
 ──────────                          ──────────────
 1. git clone cursor-team-kit        1. git clone cursor-team-kit

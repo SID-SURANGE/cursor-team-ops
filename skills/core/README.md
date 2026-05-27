@@ -56,6 +56,7 @@ Skills are installed flat — both `core/` and `community/` land in `~/.cursor/s
 ## Promoting a community skill to core
 
 A skill in `skills/community/` may be nominated for promotion after:
+
 - 3+ months with no reported issues
 - Positive feedback from at least two independent teams
 - Clean, minimal `SKILL.md` with no external dependencies
