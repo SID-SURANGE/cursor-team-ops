@@ -1,5 +1,6 @@
 ---
 name: systematic-debugging
+inspired-by: "awesome-cursor-skills (github.com/spencerpauly/awesome-cursor-skills) — hypothesis-driven debugging loop concept. No text copied. Original work."
 description: Structured hypothesis → minimal reproduction → experiment → evidence → verdict loop. Prevents random trial-and-error. Triggered by "debug this", "I can't figure out why", "systematic-debugging".
 ---
 

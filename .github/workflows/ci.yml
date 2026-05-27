@@ -1,0 +1,142 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+
+  # ── 1. Validate SKILL.md files ──────────────────────────────────────────────
+  validate-skills:
+    name: Validate SKILL.md files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check every skill directory has a SKILL.md
+        run: |
+          failed=0
+          for dir in skills/core/*/ skills/community/*/; do
+            # Skip non-directories (README.md, ATTRIBUTIONS.md picked up by glob)
+            [ -d "$dir" ] || continue
+            if [ ! -f "${dir}SKILL.md" ]; then
+              echo "❌ Missing SKILL.md in: $dir"
+              failed=1
+            else
+              echo "✅ $dir"
+            fi
+          done
+          exit $failed
+
+      - name: Check SKILL.md frontmatter has required fields
+        run: |
+          failed=0
+          for skill in skills/core/*/SKILL.md skills/community/*/SKILL.md; do
+            [ -f "$skill" ] || continue
+            if ! grep -q "^name:" "$skill"; then
+              echo "❌ Missing 'name:' frontmatter in $skill"
+              failed=1
+            fi
+            if ! grep -q "^description:" "$skill"; then
+              echo "❌ Missing 'description:' frontmatter in $skill"
+              failed=1
+            fi
+            if [ $failed -eq 0 ]; then
+              echo "✅ $skill"
+            fi
+          done
+          exit $failed
+
+  # ── 2. Validate rules ────────────────────────────────────────────────────────
+  validate-rules:
+    name: Validate .mdc rule files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check every rule has description and alwaysApply or globs
+        run: |
+          failed=0
+          for rule in rules/*.mdc; do
+            [ -f "$rule" ] || continue
+            if ! grep -q "^description:" "$rule"; then
+              echo "❌ Missing 'description:' frontmatter in $rule"
+              failed=1
+            else
+              echo "✅ $rule"
+            fi
+          done
+          exit $failed
+
+  # ── 3. Shell script linting ──────────────────────────────────────────────────
+  shellcheck:
+    name: ShellCheck (hooks + install scripts)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Lint all shell scripts
+        run: |
+          shellcheck install.sh bootstrap-project.sh sync-project.sh hooks/git-guard.sh hooks/session-context.sh
+          echo "✅ All shell scripts passed ShellCheck"
+
+  # ── 4. Security scan — no secrets in committed files ────────────────────────
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan for secrets with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── 5. Markdown lint ────────────────────────────────────────────────────────
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            README.md
+            CONTRIBUTING.md
+            ONBOARDING.md
+            TEAMS.md
+            CHANGELOG.md
+            hooks/README.md
+            rules/README.md
+            skills/**/README.md
+            skills/**/ATTRIBUTIONS.md
+          config: .markdownlint.json
+
+  # ── 6. Check no placeholder text left in new skills ────────────────────────
+  no-placeholders:
+    name: No placeholder text in skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject SKILL.md files with unfilled placeholders
+        run: |
+          failed=0
+          for skill in skills/core/*/SKILL.md skills/community/*/SKILL.md; do
+            [ -f "$skill" ] || continue
+            if grep -qiE '\[your name\]|\[replace\]|\[todo\]|\[fill in\]|\[placeholder\]' "$skill"; then
+              echo "❌ Unfilled placeholder found in $skill"
+              failed=1
+            fi
+          done
+          exit $failed
+          echo "✅ No unfilled placeholders found"

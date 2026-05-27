@@ -1,5 +1,6 @@
 ---
 name: writing-tests
+inspired-by: "awesome-cursor-skills (github.com/spencerpauly/awesome-cursor-skills) — test categorisation structure. No text copied. Original work."
 description: Produce a test structure for any language: what to cover (happy path, edge cases, error paths), how to name tests, and what not to test. Triggered by "write tests for this", "what should I test", "writing-tests".
 ---
 

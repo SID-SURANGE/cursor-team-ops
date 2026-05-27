@@ -12,6 +12,31 @@ credited out of respect, not legal obligation.
 
 ---
 
+## awesome-cursor-skills — Spencer Pauly
+
+**Source:** https://github.com/spencerpauly/awesome-cursor-skills
+**Author:** Spencer Pauly and contributors
+**License:** No licence published — credited as inspiration only, no text copied
+
+The following skills in `skills/core/` were informed by engineering workflow
+patterns published in `awesome-cursor-skills`:
+
+| Skill | What was informed by the source |
+|-------|---------------------------------|
+| `systematic-debugging` | Hypothesis-driven debugging loop concept |
+| `writing-tests` | Test categorisation structure (happy path / edge / error) |
+| `architecture-decision-records` | ADR workflow and template structure |
+
+**What was NOT taken:** No prose, no sentences, and no content was copied.
+The underlying engineering practices (structured debugging, test categorisation,
+ADR format) are generic industry standards that predate the source repository.
+
+**Licence note:** `awesome-cursor-skills` does not publish an explicit licence.
+Under default copyright law this means the source is "all rights reserved."
+Because no text was reproduced, attribution here is voluntary — provided
+out of respect for the community work. If the maintainer would prefer different
+or no attribution, please open an issue.
+
 ---
 
 ## agent-skills — Addy Osmani

@@ -232,12 +232,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the quality bar, `SKILL.md` format, a
 
 ## Attributions
 
-Workflow patterns behind three skills were inspired by [awesome-cursor-skills](https://github.com/spencerpauly/awesome-cursor-skills) (Spencer Pauly and contributors). SKILL.md files are independently written and do not reproduce text from that source.
-
-| Skill | Inspired by |
-|-------|------------|
-| `systematic-debugging` | awesome-cursor-skills community patterns |
-| `writing-tests` | awesome-cursor-skills community patterns |
-| `architecture-decision-records` | awesome-cursor-skills community patterns |
+Three core skills (`systematic-debugging`, `writing-tests`, `architecture-decision-records`) were inspired by [awesome-cursor-skills](https://github.com/spencerpauly/awesome-cursor-skills) (Spencer Pauly). Three community skills were informed by [agent-skills](https://github.com/addyosmani/agent-skills) (Addy Osmani, MIT). No text was copied from either source. Full details: [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md).
 
 > This kit is **unofficial** and not affiliated with or endorsed by Anysphere (Cursor). "Cursor" is a trademark of Anysphere, Inc.
