@@ -12,6 +12,8 @@ Roll out consistent agent rules, skills, and git guardrails across your entire e
 [![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-06b6d4?style=flat-square)](#install-once-per-machine)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-v2.1-06b6d4?style=flat-square)](CODE_OF_CONDUCT.md)
+[![Security Policy](https://img.shields.io/badge/security-policy-e85d4a?style=flat-square)](SECURITY.md)
 
 </div>
 

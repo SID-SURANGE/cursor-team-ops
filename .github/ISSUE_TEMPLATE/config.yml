@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Ask a question or start a discussion
+    url: https://github.com/SID-SURANGE/cursor-team-kit/discussions
+    about: General questions, ideas, and community conversation go here — not in Issues.
+  - name: 🔒 Report a security vulnerability
+    url: mailto:ssurange.dev@gmail.com
+    about: Please report security issues privately via email, not as a public issue.
