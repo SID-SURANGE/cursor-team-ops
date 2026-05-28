@@ -8,7 +8,7 @@
 
 Roll out consistent agent rules, skills, and git guardrails across your entire engineering team — in under 5 minutes.
 
-[![Version](https://img.shields.io/badge/version-1.2.0-6366f1?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.3.0-6366f1?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-06b6d4?style=flat-square)](#install-once-per-machine)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](CONTRIBUTING.md)
@@ -99,9 +99,10 @@ bash ~/cursor-team-kit/sync-project.sh         # copies rules + skills into .cur
 ```
 
 ```powershell
-# Windows PowerShell
-bash $HOME\cursor-team-kit\bootstrap-project.sh
-.\$HOME\cursor-team-kit\sync-project.ps1
+# Windows PowerShell — run from your repo directory
+cd C:\path\to\your\repo
+bash "$HOME/cursor-team-kit/bootstrap-project.sh"
+& "$HOME\cursor-team-kit\sync-project.ps1"
 ```
 
 Then reload Cursor → `Ctrl+Shift+P` → **Developer: Reload Window** → check **Settings → Rules, Commands**.
@@ -127,9 +128,10 @@ git push
 Team lead                           Each developer
 ──────────                          ──────────────
 1. git clone cursor-team-kit        1. git clone cursor-team-kit
-2. bootstrap-project.sh + sync      2. bash install.sh  (once)
-3. edit AGENTS.md                   3. git pull  (gets .cursor/ from repo)
-4. git push                         4. reload Cursor  ✓
+2. bash install.sh  (once)          2. bash install.sh  (once)
+3. bootstrap-project.sh + sync      3. git pull  (gets .cursor/ from repo)
+4. edit AGENTS.md                   4. reload Cursor  ✓
+5. git push
 ```
 
 See [TEAMS.md](TEAMS.md) for complete examples: web app team, API team, monorepo.

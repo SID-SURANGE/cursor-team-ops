@@ -16,7 +16,7 @@ Read this file first when answering questions about scope, requirements, or curr
 <!-- - Always open [understanding-doc] before answering flow questions. -->
 <!-- - Surface open questions from §8 before giving a final answer. -->
 
-- [replace with actual project rules or delete this line]
+<!-- Add repo-specific rules here, or delete this section if none are needed. -->
 
 ## Key file paths
 <!-- Map the most important files so the agent doesn't have to search. -->

@@ -20,6 +20,10 @@ Copy, adapt, commit, and your whole team is configured on next `git pull`.
 ### What the team lead did
 
 ```bash
+# Install the kit on the lead's machine (once)
+git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
+bash ~/cursor-team-kit/install.sh
+
 # Frontend repo
 cd ~/repos/frontend
 bash ~/cursor-team-kit/bootstrap-project.sh

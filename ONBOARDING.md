@@ -45,10 +45,10 @@ bash ~/cursor-team-kit/bootstrap-project.sh
 bash ~/cursor-team-kit/sync-project.sh
 ```
 
-**Windows PowerShell alternative for sync:**
+**Windows PowerShell alternative for sync (run from your repo directory):**
 
 ```powershell
-.\cursor-team-kit\sync-project.ps1
+& "$HOME\cursor-team-kit\sync-project.ps1"
 ```
 
 Then edit:
