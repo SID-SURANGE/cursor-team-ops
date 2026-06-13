@@ -71,4 +71,28 @@ that predate the source repository.
 
 ---
 
+## markitdown — Microsoft
+
+**Source:** https://github.com/microsoft/markitdown
+**Author:** Microsoft Corporation and contributors
+**License:** MIT License
+
+The `requirements-synthesis` skill requires markitdown as a runtime dependency for converting binary document formats (PDF, DOCX, XLSX, PPTX, images) to markdown text. The skill instructs users to install it via `pip install markitdown[all]`.
+
+No source code from markitdown is embedded in this skill. The skill calls it as an external CLI tool.
+
+**MIT License notice (as required):**
+
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+>
+> The above copyright notice and this permission notice shall be included in all
+> copies or substantial portions of the Software.
+
+---
+
 *To add attribution for a new community skill, open a PR updating this file.*

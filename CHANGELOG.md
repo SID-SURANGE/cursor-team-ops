@@ -22,6 +22,7 @@ Versions follow [Semantic Versioning](https://semver.org/).
 - `rules/architectural-drift.mdc` — conditional rule flagging cross-domain imports into private paths; defers to `.deprc.json` if present
 - `rules/telemetry-standards.mdc` — conditional rule rejecting plain-string log calls and requiring structured objects with `requestId`/`traceId`/`message`
 - `templates/commands/handoff.md` — `/handoff` slash command template scaffolded into new repos
+- `skills/community/requirements-synthesis` — ingest multiple client documents (PDF, DOCX, XLSX, HTML, images, text) and synthesize into a single `REQUIREMENTS-DRAFT.md`; requires `pip install markitdown[all]`
 
 ### Changed
 
