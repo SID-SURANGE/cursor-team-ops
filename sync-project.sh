@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # sync-project.sh — copy team rules and skills into a repo's .cursor/ for Settings UI visibility
-# Usage: bash /path/to/cursor-team-kit/sync-project.sh [repo-path]
+# Usage: bash /path/to/cursor-team-ops/sync-project.sh [repo-path]
 # Defaults to current directory. Safe to re-run (overwrites kit files only).
 
 set -euo pipefail

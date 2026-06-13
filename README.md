@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/banner.png" alt="cursor-team-kit — team-ops layer for Cursor AI" width="100%" />
+<img src="assets/banner.png" alt="cursor-team-ops — team-ops layer for Cursor AI" width="100%" />
 
-# ⚙️ cursor-team-kit
+# ⚙️ cursor-team-ops
 
 **The team-ops layer for Cursor AI**
 
@@ -21,10 +21,10 @@ Roll out consistent agent rules, skills, and git guardrails across your entire e
 
 ## Why this exists
 
-Most Cursor setups are solo configurations — copied rules, hand-pasted skills, no enforcement. cursor-team-kit solves the team problem:
+Most Cursor setups are solo configurations — copied rules, hand-pasted skills, no enforcement. cursor-team-ops solves the team problem:
 
 ```text
-git clone cursor-team-kit          →   bash install.sh          →   bash sync-project.sh
+git clone cursor-team-ops          →   bash install.sh          →   bash sync-project.sh
      ↓                                      ↓                              ↓
  get the kit                      rules + skills on             same setup in every
  on your machine                  your machine                  repo your team uses
@@ -79,16 +79,16 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 **macOS / Linux / Git Bash on Windows**
 
 ```bash
-git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
-cd ~/cursor-team-kit
+git clone https://github.com/SID-SURANGE/cursor-team-ops ~/cursor-team-ops
+cd ~/cursor-team-ops
 bash install.sh
 ```
 
 **Windows — native PowerShell**
 
 ```powershell
-git clone https://github.com/SID-SURANGE/cursor-team-kit $HOME\cursor-team-kit
-cd $HOME\cursor-team-kit
+git clone https://github.com/SID-SURANGE/cursor-team-ops $HOME\cursor-team-ops
+cd $HOME\cursor-team-ops
 .\install.ps1
 ```
 
@@ -98,15 +98,15 @@ cd $HOME\cursor-team-kit
 
 ```bash
 cd /path/to/your/repo
-bash ~/cursor-team-kit/bootstrap-project.sh   # scaffolds AGENTS.md + commands
-bash ~/cursor-team-kit/sync-project.sh         # copies rules + skills into .cursor/
+bash ~/cursor-team-ops/bootstrap-project.sh   # scaffolds AGENTS.md + commands
+bash ~/cursor-team-ops/sync-project.sh         # copies rules + skills into .cursor/
 ```
 
 ```powershell
 # Windows PowerShell — run from your repo directory
 cd C:\path\to\your\repo
-bash "$HOME/cursor-team-kit/bootstrap-project.sh"
-& "$HOME\cursor-team-kit\sync-project.ps1"
+bash "$HOME/cursor-team-ops/bootstrap-project.sh"
+& "$HOME\cursor-team-ops\sync-project.ps1"
 ```
 
 Then reload Cursor → `Ctrl+Shift+P` → **Developer: Reload Window** → check **Settings → Rules, Commands**.
@@ -119,7 +119,7 @@ nano AGENTS.md
 nano .cursor/rules/project-context.mdc
 
 git add .cursor/ AGENTS.md
-git commit -m "chore: add cursor-team-kit baseline"
+git commit -m "chore: add cursor-team-ops baseline"
 git push
 # teammates get it on next git pull — no install needed beyond step 1
 ```
@@ -131,7 +131,7 @@ git push
 ```text
 Team lead                           Each developer
 ──────────                          ──────────────
-1. git clone cursor-team-kit        1. git clone cursor-team-kit
+1. git clone cursor-team-ops        1. git clone cursor-team-ops
 2. bash install.sh  (once)          2. bash install.sh  (once)
 3. bootstrap-project.sh + sync      3. git pull  (gets .cursor/ from repo)
 4. edit AGENTS.md                   4. reload Cursor  ✓
@@ -223,10 +223,10 @@ See [hooks/README.md](hooks/README.md) for schema reference, testing guide, and 
 
 ```bash
 # When the kit releases a new version
-cd ~/cursor-team-kit && git pull
+cd ~/cursor-team-ops && git pull
 bash install.sh                          # update your machine
 bash sync-project.sh /path/to/your/repo  # update the repo
-git add .cursor/ && git commit -m "chore: sync cursor-team-kit to vX.Y.Z" && git push
+git add .cursor/ && git commit -m "chore: sync cursor-team-ops to vX.Y.Z" && git push
 # teammates get the update on next git pull
 ```
 

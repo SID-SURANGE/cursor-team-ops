@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # bootstrap-project.sh — scaffolds .cursor/ + AGENTS.md in any repo
-# Usage: bash /path/to/cursor-team-kit/bootstrap-project.sh [repo-path]
+# Usage: bash /path/to/cursor-team-ops/bootstrap-project.sh [repo-path]
 # Defaults to current directory if no path given.
 
 set -euo pipefail

@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🤝 Contributing to cursor-team-kit
+# 🤝 Contributing to cursor-team-ops
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-kit/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/pulls)
 [![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
 
 **This kit is used by real teams in production.**
