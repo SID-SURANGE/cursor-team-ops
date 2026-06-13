@@ -17,8 +17,8 @@ Machine install once → bootstrap + sync per repo → done.
 ## 1. Install the kit on your machine (~5 min)
 
 ```bash
-git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
-cd ~/cursor-team-kit
+git clone https://github.com/SID-SURANGE/cursor-team-ops ~/cursor-team-ops
+cd ~/cursor-team-ops
 bash install.sh
 ```
 
@@ -41,14 +41,14 @@ These paths are **not** listed in **Settings → Rules, Commands** — that is n
 
 ```bash
 cd /path/to/your/repo
-bash ~/cursor-team-kit/bootstrap-project.sh
-bash ~/cursor-team-kit/sync-project.sh
+bash ~/cursor-team-ops/bootstrap-project.sh
+bash ~/cursor-team-ops/sync-project.sh
 ```
 
 **Windows PowerShell alternative for sync (run from your repo directory):**
 
 ```powershell
-& "$HOME\cursor-team-kit\sync-project.ps1"
+& "$HOME\cursor-team-ops\sync-project.ps1"
 ```
 
 Then edit:
@@ -96,7 +96,7 @@ Run `sync-project.sh` only if team rules/skills are missing. Keep repo-specific 
 ## 4. Keeping the kit up to date
 
 ```bash
-cd ~/cursor-team-kit
+cd ~/cursor-team-ops
 git pull
 bash install.sh
 bash sync-project.sh /path/to/each/repo

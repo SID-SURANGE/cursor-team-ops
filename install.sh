@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install.sh — symlinks cursor-team-kit into ~/.cursor/
+# install.sh — symlinks cursor-team-ops into ~/.cursor/
 # Usage: bash install.sh
 # Re-run after git pull to update.
 
@@ -67,7 +67,7 @@ for script in "$KIT_DIR/hooks/"*.sh; do
 done
 
 # ── Record version ────────────────────────────────────────────────────────────
-cp "$KIT_DIR/VERSION" "$CURSOR_DIR/.team-kit-version"
+cp "$KIT_DIR/VERSION" "$CURSOR_DIR/.team-ops-version"
 
 echo ""
 echo "Done. Team kit v$(cat "$KIT_DIR/VERSION") installed to ~/.cursor/"

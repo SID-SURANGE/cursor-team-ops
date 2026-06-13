@@ -1,4 +1,4 @@
-<!-- ⚙️ cursor-team-kit — Pull Request -->
+<!-- ⚙️ cursor-team-ops — Pull Request -->
 <!-- Fill in all sections. The checklist must pass before merge. -->
 
 ## What does this PR do?

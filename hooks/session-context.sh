@@ -4,7 +4,7 @@
 # Installed to: ~/.cursor/hooks/session-context.sh
 # hooks.json path: ./hooks/session-context.sh (relative to ~/.cursor/)
 
-VERSION_FILE="$HOME/.cursor/.team-kit-version"
+VERSION_FILE="$HOME/.cursor/.team-ops-version"
 
 if [ -f "$VERSION_FILE" ]; then
   VERSION=$(tr -d '[:space:]' < "$VERSION_FILE")

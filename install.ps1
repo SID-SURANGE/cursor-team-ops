@@ -1,4 +1,4 @@
-# install.ps1 — installs cursor-team-kit into $HOME\.cursor\ on Windows
+# install.ps1 — installs cursor-team-ops into $HOME\.cursor\ on Windows
 # Usage: .\install.ps1
 # Re-run after git pull to update.
 #
@@ -102,7 +102,7 @@ Get-ChildItem (Join-Path $KitDir "hooks") -Filter "*.sh" | ForEach-Object {
 }
 
 # ── Record version ────────────────────────────────────────────────────────────
-Copy-Item (Join-Path $KitDir "VERSION") (Join-Path $CursorDir ".team-kit-version") -Force
+Copy-Item (Join-Path $KitDir "VERSION") (Join-Path $CursorDir ".team-ops-version") -Force
 
 Write-Host ""
 Write-Host "Done. Team kit v$version installed to $HOME\.cursor\"

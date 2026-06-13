@@ -2,7 +2,7 @@
 
 # 👥 Team Setup Examples
 
-[![cursor-team-kit](https://img.shields.io/badge/cursor--team--kit-v1.3.0-6366f1?style=flat-square)](README.md)
+[![cursor-team-ops](https://img.shields.io/badge/cursor--team--kit-v1.3.0-6366f1?style=flat-square)](README.md)
 
 Real-world setups for three team types — every file shown, nothing left as an exercise.
 Copy, adapt, commit, and your whole team is configured on next `git pull`.
@@ -21,27 +21,27 @@ Copy, adapt, commit, and your whole team is configured on next `git pull`.
 
 ```bash
 # Install the kit on the lead's machine (once)
-git clone https://github.com/SID-SURANGE/cursor-team-kit ~/cursor-team-kit
-bash ~/cursor-team-kit/install.sh
+git clone https://github.com/SID-SURANGE/cursor-team-ops ~/cursor-team-ops
+bash ~/cursor-team-ops/install.sh
 
 # Frontend repo
 cd ~/repos/frontend
-bash ~/cursor-team-kit/bootstrap-project.sh
-bash ~/cursor-team-kit/sync-project.sh
+bash ~/cursor-team-ops/bootstrap-project.sh
+bash ~/cursor-team-ops/sync-project.sh
 # edited AGENTS.md and project-context.mdc (see below)
-git add .cursor/ AGENTS.md && git commit -m "chore: add cursor-team-kit baseline"
+git add .cursor/ AGENTS.md && git commit -m "chore: add cursor-team-ops baseline"
 
 # Backend repo — same steps
 cd ~/repos/backend
-bash ~/cursor-team-kit/bootstrap-project.sh
-bash ~/cursor-team-kit/sync-project.sh
-git add .cursor/ AGENTS.md && git commit -m "chore: add cursor-team-kit baseline"
+bash ~/cursor-team-ops/bootstrap-project.sh
+bash ~/cursor-team-ops/sync-project.sh
+git add .cursor/ AGENTS.md && git commit -m "chore: add cursor-team-ops baseline"
 ```
 
 ### What each developer ran (once)
 
 ```bash
-bash ~/cursor-team-kit/install.sh
+bash ~/cursor-team-ops/install.sh
 # then git pull in each repo — .cursor/ arrives via normal git sync
 ```
 
@@ -344,16 +344,16 @@ When the kit releases a new version:
 
 ```bash
 # Team lead — update one repo, commit, push
-cd ~/cursor-team-kit && git pull
+cd ~/cursor-team-ops && git pull
 cd /path/to/your/repo
-bash ~/cursor-team-kit/sync-project.sh
+bash ~/cursor-team-ops/sync-project.sh
 git add .cursor/
-git commit -m "chore: sync cursor-team-kit to v$(cat ~/cursor-team-kit/VERSION)"
+git commit -m "chore: sync cursor-team-ops to v$(cat ~/cursor-team-ops/VERSION)"
 git push
 
 # Each developer — pull the repo update, re-run machine install
 git pull
-cd ~/cursor-team-kit && git pull && bash install.sh
+cd ~/cursor-team-ops && git pull && bash install.sh
 # Reload Cursor
 ```
 
