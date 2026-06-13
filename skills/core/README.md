@@ -2,7 +2,7 @@
 
 # 🧠 Core Skills
 
-[![skills](https://img.shields.io/badge/skills-12%20curated-6366f1?style=flat-square)](#skill-reference)
+[![skills](https://img.shields.io/badge/skills-15%20curated-6366f1?style=flat-square)](#skill-reference)
 [![tier](https://img.shields.io/badge/tier-core%20%28maintainer%20reviewed%29-a855f7?style=flat-square)](#skill-reference)
 
 Curated, maintainer-reviewed skills — tested on real projects, kept minimal.
@@ -129,6 +129,30 @@ Skills are installed flat — both `core/` and `community/` land in `~/.cursor/s
 **Say:** *"generate handoff"* / *"close session"* / *"write handoff doc"*
 
 **Use when:** You're finishing a session — especially a long debugging session or multi-day task — and someone else (or future you) needs to pick it up. The skill writes a `HANDOFF.md` capturing what was done, what was tried and failed (and why), what's still open, and the recommended first next step. Unlike a PR summary, it records the *debugging context and failed attempts* that a diff can't show.
+
+---
+
+### 🔬 `commit-history-audit`
+
+**Say:** *"audit my commits"* / *"check commit history before PR"* / *"are my commits clean"*
+
+**Use when:** Your branch has several commits and you want to catch hygiene problems before a reviewer does — WIP markers, messages in the wrong tense, commits that should be squashed, or subjects that are too long. The skill reads the last 50 commits on the base branch first to detect what convention the repo actually uses (Conventional Commits, ticket-prefixed, or free-form), then audits only against that. It never imposes a standard the project hasn't already adopted. Each failing commit gets a specific suggested rewrite and the rebase command to fix it.
+
+---
+
+### 🚦 `release-readiness`
+
+**Say:** *"am I ready to release"* / *"can I ship this"* / *"is this ready to merge"*
+
+**Use when:** You're about to ship — whether that's tagging a release or merging a feature branch to main. The skill first detects which workflow your project uses: if it finds git tags and a version file, it runs a full 8-gate release check (version bumped, CHANGELOG entry, no debug code, feature flags, migration notes, deployment docs, clean tree, up to date). If the project deploys continuously from main with no formal versioning, it runs a lighter 4-gate pre-merge check covering the gates that matter regardless of workflow. The verdict is BLOCK or READY, with specific remediation for each failure.
+
+---
+
+### 🌊 `env-drift-check`
+
+**Say:** *"env drift"* / *"check my environment"* / *"why does it work locally but not in CI"*
+
+**Use when:** Something works locally but breaks in CI or staging, and you suspect an environment mismatch. The skill checks four axes independently: (1) keys referenced in code but missing from `.env.example` (undocumented variables that break new developer setup), (2) runtime version mismatches between `.nvmrc`, the CI matrix, and the Docker base image, (3) required env vars that have no corresponding CI secret or `env:` block, and (4) whether the Dockerfile uses `npm ci` or `poetry install` with the lockfile (vs. `npm install` which silently ignores it). Only the Docker lockfile issue is blocking; everything else is advisory with one-line fixes.
 
 ---
 
