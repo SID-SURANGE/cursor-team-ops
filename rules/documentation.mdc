@@ -21,6 +21,20 @@ alwaysApply: false
 - Use `startLine:endLine:filepath` citation blocks when referencing existing code.
 - Do not describe code in prose when a direct citation is possible.
 
+## Code comments
+- Write why-comments only: explain the constraint, invariant, tradeoff, or non-obvious reason. Skip what-comments — the code already says what it does.
+- One to two lines per comment. If you need three, the code likely needs restructuring.
+- Do not add a comment unless removing it would leave a future reader confused about intent.
+
+## Changelog
+- Update `CHANGELOG.md` on every release. Never let it lag behind the tag.
+- Follow Keep-a-Changelog format: Added / Changed / Fixed / Removed sections, ISO date, version heading.
+- Skip internal entries (chore, ci, test, style) — only include changes visible to users or callers.
+
+## README hygiene
+- Keep the README in sync with the public API and CLI interface. After any feature or API change, check whether the Quick Start, Usage, or API sections are still accurate.
+- Propose targeted updates — do not rewrite sections that are unaffected.
+
 ## File creation
 - Never proactively create README or documentation files unless explicitly asked.
 - Prefer editing an existing file over creating a new one.

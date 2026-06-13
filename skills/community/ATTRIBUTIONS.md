@@ -23,13 +23,11 @@ patterns published in `awesome-cursor-skills`:
 
 | Skill | What was informed by the source |
 |-------|---------------------------------|
-| `systematic-debugging` | Hypothesis-driven debugging loop concept |
-| `writing-tests` | Test categorisation structure (happy path / edge / error) |
 | `architecture-decision-records` | ADR workflow and template structure |
 
 **What was NOT taken:** No prose, no sentences, and no content was copied.
-The underlying engineering practices (structured debugging, test categorisation,
-ADR format) are generic industry standards that predate the source repository.
+The underlying engineering practices (ADR format) are generic industry standards
+that predate the source repository.
 
 **Licence note:** `awesome-cursor-skills` does not publish an explicit licence.
 Under default copyright law this means the source is "all rights reserved."

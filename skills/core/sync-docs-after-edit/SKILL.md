@@ -56,16 +56,18 @@ Read the `.md` file and the changed source files. Assess:
 
 ### 4. Report per-file verdicts
 
+Always include `README.md` and `CHANGELOG.md` as explicit rows — even if they appear unaffected. These are the two docs most likely to drift silently.
+
 ```
 Documentation sync report
 Changed source files: <list>
 
 | Doc file | Verdict | Notes |
 |----------|---------|-------|
-| README.md | Up to date | No references to changed areas |
+| README.md | Needs update | Quick Start references `DB_URL` — now `DATABASE_URL` |
+| CHANGELOG.md | Needs entry | No entry yet for changes in this diff |
 | docs/api.md | Needs update | References `getUser()` which was renamed to `fetchUser()` |
-| docs/setup.md | Needs update | Step 3 references env var `DB_URL` — now `DATABASE_URL` |
-| CHANGELOG.md | Not affected | |
+| docs/setup.md | Up to date | |
 ```
 
 ### 5. Apply updates (if instructed)
