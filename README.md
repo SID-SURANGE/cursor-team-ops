@@ -39,7 +39,7 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 | Layer | What it does |
 |-------|-------------|
 | 🛡️ **8 rules** | 5 always-on guardrails + 3 conditional rules (DB transactions, import boundaries, structured logging) |
-| 🧠 **17 skills** | On-demand workflows — PR creation, ADRs, session handoffs, requirements synthesis, and more |
+| 🧠 **20 skills** | On-demand workflows — PR creation, ADRs, session handoffs, requirements synthesis, and more |
 | 🪝 **4 hooks** | `git-guard.sh` · `db-migration-guard.sh` · `license-gatekeeper.sh` · `session-context.sh` |
 | ⚡ **4 commands** | `/pr` · `/review` · `/fix-issue` · `/handoff` — starter slash commands for every repo |
 | 📋 **Templates** | `AGENTS.md` + `project-context.mdc` scaffolded into every new repo |
@@ -59,7 +59,7 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 │   ├── transaction-atomicity.mdc   │   ├── transaction-atomicity.mdc
 │   ├── architectural-drift.mdc     │   ├── architectural-drift.mdc
 │   └── telemetry-standards.mdc     │   └── project-context.mdc    ← yours to edit
-├── skills/  (16 skills)            ├── skills/  (16 skills)
+├── skills/  (20 skills)            ├── skills/  (20 skills)
 ├── hooks/                          ├── commands/
 │   ├── git-guard.sh                │   ├── pr.md
 │   ├── db-migration-guard.sh       │   ├── review.md
@@ -172,30 +172,33 @@ Skills fire automatically when the agent detects a trigger phrase.
 
 **Core skills**
 
-| Skill | Say this to trigger it |
-|-------|----------------------|
-| `pre-commit-check` | *"commit this"* / *"create a commit"* |
-| `commit-message` | *"write a commit message"* / *"conventional commit"* |
-| `pr-summary` | *"open a PR"* / *"push and PR"* |
-| `minimal-diff-review` | *"review my changes"* / *"check the diff"* |
-| `pr-review-canvas` | *"review canvas"* / *"map this PR"* |
-| `requirements-qa` | *(auto — when working in BRD / docs / requirements folders)* |
-| `architecture-decision-records` | *"create an ADR"* / *"document this decision"* |
-| `deslop` | *"deslop"* / *"clean this up"* / *"remove dead code"* |
-| `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* |
-| `document-this` | *"document this"* / *"add a why-comment"* |
-| `write-changelog` | *"write a changelog entry"* / *"update CHANGELOG"* |
-| `handoff` | *"generate handoff"* / *"close session"* |
+| Skill | Say this to trigger it | What it does |
+|-------|----------------------|-------------|
+| `pre-commit-check` | *"commit this"* / *"create a commit"* | Audits staged changes for secrets, debug code, and unrelated files before committing |
+| `commit-message` | *"write a commit message"* / *"conventional commit"* | Produces a Conventional Commits-compliant message inferred from the staged diff |
+| `pr-summary` | *"open a PR"* / *"push and PR"* | Creates a PR with title, summary, and test plan from all commits on the branch |
+| `minimal-diff-review` | *"review my changes"* / *"check the diff"* | Reviews changes for scope creep, convention drift, and quality issues |
+| `pr-review-canvas` | *"review canvas"* / *"map this PR"* | Groups PR changes by purpose, flags risky sections, and produces a reviewer map |
+| `requirements-qa` | *(auto — when working in BRD / docs / requirements folders)* | Flags invented content, conflicts, and open questions in requirements documents |
+| `architecture-decision-records` | *"create an ADR"* / *"document this decision"* | Captures architectural decisions in a standard ADR template |
+| `deslop` | *"deslop"* / *"clean this up"* / *"remove dead code"* | Strips narrating comments, dead imports, and pointless try/catch blocks |
+| `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* | Scans all markdown files after code changes and flags stale or contradicted docs |
+| `document-this` | *"document this"* / *"add a why-comment"* | Adds why-only comments that explain intent and constraints, not what the code does |
+| `write-changelog` | *"write a changelog entry"* / *"update CHANGELOG"* | Generates a Keep-a-Changelog entry from commit history |
+| `handoff` | *"generate handoff"* / *"close session"* | Documents progress, root causes, failed attempts, and next steps for session handoff |
+| `commit-history-audit` | *"audit my commits"* / *"check commit history before PR"* | Audits all commits on the branch for WIP markers, wrong convention, overlength subjects, and merge commits that should be squashed. Self-calibrates to the repo's own commit style — never imposes Conventional Commits on a free-form repo. |
+| `release-readiness` | *"am I ready to release"* / *"can I ship this"* / *"is this ready to merge"* | Detects workflow mode (formal release with tags vs. continuous deployment from main) and runs the matching checklist — 4 gates for CD teams, 8 gates for versioned projects. |
+| `env-drift-check` | *"env drift"* / *"why does it work locally but not in CI"* | Cross-references `.env.example` keys vs. code, runtime version across `.nvmrc`/CI matrix/Docker, CI secret coverage, and Docker lockfile consistency. |
 
 ### Community skills
 
-| Skill | Triggered by |
-|-------|-------------|
-| `workflow-from-chats` | *"make this a skill"* / *"extract this workflow"* |
-| `spec-driven-development` | *"write a spec"* / *"spec this out"* / *"define this first"* |
-| `security-hardening` | *"security review"* / *"harden this"* / *"check for vulnerabilities"* |
-| `ci-cd-pipeline` | *"set up CI"* / *"add GitHub Actions"* / *"fix the pipeline"* |
-| `requirements-synthesis` | *"synthesize these requirements"* / *"read these client docs"* |
+| Skill | Triggered by | What it does |
+|-------|-------------|-------------|
+| `workflow-from-chats` | *"make this a skill"* | Turns a repeated conversation pattern into a committable `SKILL.md` |
+| `spec-driven-development` | *"write a spec"* / *"spec this out"* | Writes a structured spec before any code is touched |
+| `security-hardening` | *"security review"* / *"harden this"* | Reviews code against OWASP Top 10 patterns |
+| `ci-cd-pipeline` | *"set up CI"* / *"fix the pipeline"* | Scaffolds or repairs a quality-gate pipeline with lint, tests, build, and security audit |
+| `requirements-synthesis` | *"synthesize these requirements"* | Ingests PDFs, DOCX, and other client docs into a single structured requirements draft |
 
 See [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md) for full attribution details. [Contribute a skill →](CONTRIBUTING.md)
 
