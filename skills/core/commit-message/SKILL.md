@@ -1,6 +1,6 @@
 ---
 name: commit-message
-description: Enforce Conventional Commits discipline — infer type (feat/fix/refactor/…) and scope from the staged diff and changed file paths, and produce a structured `type(scope): subject` message. Goes beyond basic AI commit generation by applying CC rules and scope inference. Triggered by "write a commit message", "what should I commit this as", "commit-message".
+description: Enforce Conventional Commits discipline — infer type (feat/fix/refactor/…) and scope from the staged diff and changed file paths, and produce a structured `type(scope): subject` message. Goes beyond basic AI commit generation by applying CC rules and scope inference. Triggered by "write a commit message", "what should I commit this as", "help me commit", "what should my commit say", "commit msg", "suggest a commit message", "how do I phrase this commit", "write a good commit", "commit-message".
 ---
 
 # ✏️ Skill: commit-message

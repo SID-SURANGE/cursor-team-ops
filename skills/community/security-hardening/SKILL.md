@@ -1,6 +1,6 @@
 ---
 name: security-hardening
-description: Apply security-first practices when building or reviewing code — input validation, secrets management, auth checks, OWASP Top 10 coverage. Triggered by "security review", "harden this", "is this secure", "security-hardening", "check for vulnerabilities".
+description: Apply security-first practices when building or reviewing code — input validation, secrets management, auth checks, OWASP Top 10 coverage. Triggered by "security review", "harden this", "is this secure", "security-hardening", "check for vulnerabilities", "audit my code", "run a security check", "is there anything unsafe here", "check for SQL injection", "check for XSS", "are there any security issues".
 attribution: >
   Independently written. OWASP Top 10 and secure coding practices are
   publicly documented standards. The boundary-system structure and pre-deployment

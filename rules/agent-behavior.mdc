@@ -37,3 +37,16 @@ alwaysApply: true
 ## Parallel tool calls
 - When multiple independent pieces of information are needed, batch tool calls in a single response.
 - Do not wait for sequential results when calls are independent.
+
+## Hallucination prevention
+- Never invent a function signature, method name, CLI flag, or config key. If you are not certain it exists in the installed version, say so and tell the user where to verify.
+- When using a third-party package or API method for the first time in a session, state the source of truth (docs URL, `npm info <pkg>`, `pip show <pkg>`, official changelog). Do not rely on training data for version-specific details.
+- If a package name looks unfamiliar or you have low confidence it exists, run `npm list <pkg>` / `pip show <pkg>` / equivalent before using it — do not assume.
+
+## Before presenting multi-file changes
+Run through this checklist silently before reporting done on any AI-generated change spanning more than one file:
+1. Did every import reference a real, installed symbol (not an invented one)?
+2. Did any file get silently modified outside the stated task scope?
+3. Does the change compile / pass the project's lint command (if known)?
+4. Are there any hardcoded secrets, credentials, or environment-specific values introduced?
+If any check fails, fix it first — do not report done and leave it for the user to discover.

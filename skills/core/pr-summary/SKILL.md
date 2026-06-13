@@ -1,6 +1,6 @@
 ---
 name: pr-summary
-description: Create a pull request with a clear title, summary, and test plan using the gh CLI. Use when the user asks to open a PR, create a pull request, "push and PR", or "submit for review". Analyzes all commits in the branch, not just the latest.
+description: Create a pull request with a clear title, summary, and test plan using the gh CLI. Use when the user asks to open a PR, create a pull request, "push and PR", "submit for review", "raise a PR", "write PR description", "write the PR", "I'm ready to merge", "open a pull request", "create PR", "submit my work". Analyzes all commits in the branch, not just the latest.
 disable-model-invocation: true
 ---
 

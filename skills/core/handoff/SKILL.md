@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Generate a structured session handoff document capturing progress, root causes, failed attempts, open issues, and next steps. Triggered by "generate handoff", "close session", "write handoff doc", "handoff".
+description: Generate a structured session handoff document capturing progress, root causes, failed attempts, open issues, and next steps. Triggered by "generate handoff", "close session", "write handoff doc", "end of day", "EOD", "I'm done for today", "wrapping up", "switching tasks", "summarise what we did", "summarize progress", "session summary", "handoff".
 ---
 
 # 📋 Handoff
@@ -33,7 +33,14 @@ Identify:
 
 ### 3. Write the handoff document
 
-Output to `HANDOFF.md` in the repo root (or a path the user specifies):
+Write to **two paths simultaneously**:
+
+| Path | Purpose |
+|------|---------|
+| `.cursor/session-handoff.md` | Machine-readable — auto-injected at next session start |
+| `HANDOFF.md` (repo root) | Human-readable — shareable, committable |
+
+Both files get identical content. `.cursor/session-handoff.md` is picked up by the `sessionStart` hook so the next Cursor session starts warm without the developer having to do anything.
 
 ```markdown
 # Handoff — <date>
@@ -73,7 +80,8 @@ Output to `HANDOFF.md` in the repo root (or a path the user specifies):
 - Reference commit SHAs for specific changes rather than re-describing the diff.
 
 ### 5. Report
-Tell the user: file written, key open issues, and recommended first next step.
+Tell the user: both files written, key open issues, and recommended first next step. Remind them that `.cursor/session-handoff.md` will be auto-loaded at the next session start.
 
 ## Output
-A single `HANDOFF.md` file ready to commit or share.
+- `.cursor/session-handoff.md` — auto-injected next session (do not commit this file; add to `.gitignore`)
+- `HANDOFF.md` — shareable summary for the team or future self

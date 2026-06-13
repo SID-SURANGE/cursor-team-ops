@@ -1,6 +1,6 @@
 ---
 name: minimal-diff-review
-description: Review a set of code or document changes for scope creep, convention drift, and quality issues following team standards. Use when the user asks to "review my changes", "check the diff", "look at what I changed", or before a PR is created. Also use proactively after large edits to check nothing went out of scope.
+description: Review a set of code or document changes for scope creep, convention drift, and quality issues following team standards. Use when the user asks to "review my changes", "check the diff", "look at what I changed", "is this good to go", "sanity check my code", "does this look right", "review before I push", "quick review", or before a PR is created. Also use proactively after large edits to check nothing went out of scope.
 disable-model-invocation: true
 ---
 

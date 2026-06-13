@@ -1,6 +1,6 @@
 ---
 name: pre-commit-check
-description: Check staged changes before creating a git commit. Reviews the diff for secrets, unrelated changes, debug code, and matches the repo's commit message style. Use when the user asks to commit, "create a commit", "git commit", or "commit this". Always run this before committing.
+description: Check staged changes before creating a git commit. Reviews the diff for secrets, unrelated changes, debug code, oversized PRs, and matches the repo's commit message style. Use when the user says "commit", "create a commit", "git commit", "commit this", "commit my changes", "ready to commit", "safe to commit", "check my changes", "stage and commit", "push my work", or "I'm done with this task".
 disable-model-invocation: true
 ---
 
@@ -10,6 +10,7 @@ disable-model-invocation: true
 1. `git status` — list staged and unstaged files.
 2. `git diff --cached` — full staged diff.
 3. `git log --oneline -5` — recent commit messages to infer style.
+4. `git diff --cached --shortstat` — line and file counts for size check.
 
 ## Check the staged diff for
 
@@ -20,6 +21,8 @@ disable-model-invocation: true
 | Changes to files unrelated to the stated task | Flag — do not auto-unstage |
 | Debug code (`console.log`, `print(`, `debugger`, `breakpoint()`) | Flag |
 | Nothing staged | Do not create an empty commit. Tell the user. |
+| >400 lines changed or >10 files touched | Flag as oversized — suggest splitting by concern |
+| Multiple unrelated concerns in one diff | Flag — name each concern and suggest separate commits |
 
 ## Commit message
 

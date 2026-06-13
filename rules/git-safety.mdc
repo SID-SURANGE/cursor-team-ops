@@ -10,6 +10,12 @@ alwaysApply: true
 - Never push to the remote unless the user explicitly asks.
 - Do not create an empty commit if there are no staged changes.
 
+## Branch naming
+- Never push directly to `main` or `master`. Always work on a feature branch.
+- Branch names must follow the pattern: `<type>/<short-description>` where type is one of `feature`, `fix`, `chore`, `docs`, `refactor`, `test`.
+- Examples: `feature/user-auth`, `fix/login-timeout`, `chore/update-deps`.
+- If the user is on `main`/`master` and asks to start work, suggest creating a branch first: `git checkout -b feature/<description>`.
+
 ## Amending commits
 - Avoid `git commit --amend`. Only amend HEAD when ALL of these are true:
   1. User explicitly asked to amend, OR commit succeeded but pre-commit hook auto-modified files.

@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: Strip redundant comments, dead variables/imports, and defensive try/catches wrapping trivially safe operations. Triggered by "deslop", "clean this up", "remove dead code".
+description: Strip redundant comments, dead variables/imports, and defensive try/catches wrapping trivially safe operations. Triggered by "deslop", "clean this up", "remove dead code", "clean up AI-generated code", "remove noise", "tidy this", "remove unnecessary code", "clean the output", "simplify this", "remove boilerplate".
 ---
 
 # 🧹 Skill: deslop
