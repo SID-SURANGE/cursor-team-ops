@@ -12,10 +12,22 @@ Not yet in core, but tested on real projects.
 
 ---
 
+## Skills
+
+| Skill | Triggered by | External deps? |
+|-------|-------------|---------------|
+| `workflow-from-chats` | *"make this a skill"* / *"extract this workflow"* | None |
+| `spec-driven-development` | *"write a spec"* / *"spec this out"* | None |
+| `security-hardening` | *"security review"* / *"harden this"* | None |
+| `ci-cd-pipeline` | *"set up CI"* / *"add GitHub Actions"* | None |
+| `requirements-synthesis` | *"synthesize these requirements"* / *"read these client docs"* | `pip install markitdown[all]` |
+
+---
+
 ## Quality bar for community skills
 
 - Generic — works for any language, framework, or project type
-- Self-contained — no external dependencies beyond common shell tools
+- Self-contained — no external dependencies beyond common shell tools (exception: skills that require a clearly documented one-time install are allowed)
 - Distinct trigger phrases — doesn't overlap with an existing skill
 - Tested by the contributor on at least one real project
 

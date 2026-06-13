@@ -39,7 +39,7 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 | Layer | What it does |
 |-------|-------------|
 | 🛡️ **8 rules** | 5 always-on guardrails + 3 conditional rules (DB transactions, import boundaries, structured logging) |
-| 🧠 **16 skills** | On-demand workflows — PR creation, ADRs, session handoffs, doc sync, and more |
+| 🧠 **17 skills** | On-demand workflows — PR creation, ADRs, session handoffs, requirements synthesis, and more |
 | 🪝 **4 hooks** | `git-guard.sh` · `db-migration-guard.sh` · `license-gatekeeper.sh` · `session-context.sh` |
 | ⚡ **4 commands** | `/pr` · `/review` · `/fix-issue` · `/handoff` — starter slash commands for every repo |
 | 📋 **Templates** | `AGENTS.md` + `project-context.mdc` scaffolded into every new repo |
@@ -195,10 +195,11 @@ Skills fire automatically when the agent detects a trigger phrase.
 | `spec-driven-development` | *"write a spec"* / *"spec this out"* / *"define this first"* |
 | `security-hardening` | *"security review"* / *"harden this"* / *"check for vulnerabilities"* |
 | `ci-cd-pipeline` | *"set up CI"* / *"add GitHub Actions"* / *"fix the pipeline"* |
+| `requirements-synthesis` | *"synthesize these requirements"* / *"read these client docs"* |
 
 See [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md) for full attribution details. [Contribute a skill →](CONTRIBUTING.md)
 
-> **Skills vs. commands** — Skills are auto-triggered by the agent. Commands (`/pr`, `/review`, `/fix-issue`) are typed manually with `/` in the agent input.
+> **Skills vs. commands** — Skills are auto-triggered by the agent. Commands (`/pr`, `/review`, `/fix-issue`, `/handoff`) are typed manually with `/` in the agent input.
 
 ---
 
