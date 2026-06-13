@@ -29,7 +29,7 @@ Restart or reload Cursor after install.
 **Verify (machine — filesystem, not Settings UI):**
 
 - [ ] `~/.cursor/rules/` contains five `.mdc` files (`core-development`, `git-safety`, etc.)
-- [ ] `~/.cursor/skills/` contains 14 skill directories, each with `SKILL.md`
+- [ ] `~/.cursor/skills/` contains 16 skill directories, each with `SKILL.md`
 - [ ] `~/.cursor/hooks.json` exists
 - [ ] `cat ~/.cursor/.team-kit-version` shows the kit version (e.g. `1.1.0`)
 
@@ -82,12 +82,14 @@ Run `sync-project.sh` only if team rules/skills are missing. Keep repo-specific 
 
 | Task | Kit handles via |
 |------|----------------|
-| Start work in a new repo | Say "explore this codebase" → `discover-repo` skill |
 | Commit changes | Say "commit this" → `pre-commit-check` skill → then commit |
 | Open a PR | Say "create a PR" → `pr-summary` skill |
 | Review a diff | Say "review my changes" → `minimal-diff-review` skill |
 | Work on BRD/docs | `documentation` rule + `requirements-qa` skill (automatic) |
+| End a session | Say "generate handoff" → `handoff` skill |
 | Try to force-push | `git-guard.sh` hook blocks/warns |
+| Commit a destructive migration | `db-migration-guard.sh` hook blocks |
+| Add a copyleft package | `license-gatekeeper.sh` hook blocks |
 
 ---
 

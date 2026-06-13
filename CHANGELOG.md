@@ -2,12 +2,37 @@
 
 # 📋 Changelog
 
-[![Version](https://img.shields.io/badge/latest-1.3.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-kit/releases)
+[![Version](https://img.shields.io/badge/latest-1.4.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-kit/releases)
 
 All notable changes to cursor-team-kit are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
 
 </div>
+
+---
+
+## 1.4.0 — 2026-06-13
+
+### Added
+
+- `skills/core/handoff` — structured session-close document capturing progress, failed attempts, open issues, and next steps; triggered by "generate handoff" / "close session"
+- `hooks/db-migration-guard.sh` — pre-commit hook blocking destructive migration patterns: DROP COLUMN, NOT NULL without DEFAULT, non-CONCURRENT index creation, DROP TABLE, TRUNCATE
+- `hooks/license-gatekeeper.sh` — pre-commit hook blocking packages with copyleft licenses (GPL-2/3, AGPL-3, LGPL, SSPL, EUPL) on lockfile changes; uses license-checker / pip-licenses / cargo-license where available
+- `rules/transaction-atomicity.mdc` — conditional rule flagging multi-step DB writes missing explicit transaction wrappers; scoped to `.ts/.js/.py/.go/.rb/.java/.cs`
+- `rules/architectural-drift.mdc` — conditional rule flagging cross-domain imports into private paths; defers to `.deprc.json` if present
+- `rules/telemetry-standards.mdc` — conditional rule rejecting plain-string log calls and requiring structured objects with `requestId`/`traceId`/`message`
+- `templates/commands/handoff.md` — `/handoff` slash command template scaffolded into new repos
+
+### Changed
+
+- `hooks.json` — registered `db-migration-guard.sh` and `license-gatekeeper.sh` on `git commit` trigger
+- `hooks/session-context.sh` — updated skills, rules, and hooks inventory; removed stale deleted skill references
+- `.markdownlint.json` — disabled MD060 (table column style) introduced by markdownlint-cli2 v0.22.1
+- `README.md`, `rules/README.md`, `skills/core/README.md`, `hooks/README.md`, `ONBOARDING.md` — updated counts, tables, and references to reflect all additions
+
+### Removed
+
+- Stale skill references (`discover-repo`, `verify-this`, `fix-merge-conflicts`, `systematic-debugging`, `writing-tests`) removed from `session-context.sh` and all documentation (skills themselves were removed in a prior session)
 
 ---
 

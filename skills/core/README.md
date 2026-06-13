@@ -2,7 +2,7 @@
 
 # 🧠 Core Skills
 
-[![skills](https://img.shields.io/badge/skills-14%20curated-6366f1?style=flat-square)](#skill-reference)
+[![skills](https://img.shields.io/badge/skills-12%20curated-6366f1?style=flat-square)](#skill-reference)
 [![tier](https://img.shields.io/badge/tier-core%20%28maintainer%20reviewed%29-a855f7?style=flat-square)](#skill-reference)
 
 Curated, maintainer-reviewed skills — tested on real projects, kept minimal.
@@ -36,20 +36,18 @@ Skills are installed flat — both `core/` and `community/` land in `~/.cursor/s
 
 | Skill | Triggered by |
 |-------|-------------|
-| 🔭 `discover-repo` | *"explore this codebase"* / *"walk me through this project"* |
 | 🔍 `pre-commit-check` | *"commit this"* / *"create a commit"* |
+| 💬 `commit-message` | *"write a commit message"* / *"conventional commit"* |
 | 📬 `pr-summary` | *"open a PR"* / *"push and PR"* |
 | 🔎 `minimal-diff-review` | *"review my changes"* / *"check the diff"* |
-| 📋 `requirements-qa` | *(auto — when working in BRD / docs / requirements folders)* |
-| ⚡ `workflow-from-chats` | *"make this a skill"* / *"extract this workflow"* |
-| ✅ `verify-this` | *"verify this"* / *"prove this works"* |
 | 🗺️ `pr-review-canvas` | *"review canvas"* / *"map this PR"* |
-| 🧹 `deslop` | *"deslop"* / *"clean this up"* / *"remove dead code"* |
-| 🔀 `fix-merge-conflicts` | *"fix merge conflicts"* / *"resolve conflicts"* |
-| 📝 `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* |
-| 🐛 `systematic-debugging` | *"debug this"* / *"I can't figure out why"* |
-| 🧪 `writing-tests` | *"write tests for this"* / *"what should I test"* |
+| 📋 `requirements-qa` | *(auto — when working in BRD / docs / requirements folders)* |
 | 🏛️ `architecture-decision-records` | *"create an ADR"* / *"document this decision"* |
+| 🧹 `deslop` | *"deslop"* / *"clean this up"* / *"remove dead code"* |
+| 📝 `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* |
+| 💡 `document-this` | *"document this"* / *"add a why-comment"* |
+| 📋 `write-changelog` | *"write a changelog entry"* / *"update CHANGELOG"* |
+| 🤝 `handoff` | *"generate handoff"* / *"close session"* |
 
 ---
 

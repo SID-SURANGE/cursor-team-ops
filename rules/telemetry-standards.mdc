@@ -1,0 +1,67 @@
+---
+description: Telemetry standards — enforce structured logging with mandatory metadata fields; reject plain string log calls
+globs: "**/*.ts,**/*.tsx,**/*.js,**/*.jsx,**/*.py,**/*.go,**/*.java,**/*.rb,**/*.cs"
+alwaysApply: false
+---
+
+# Telemetry Standards
+
+## The rule
+All logging calls must pass a **structured object** containing the mandatory metadata fields. Plain string log calls are not allowed in production code paths.
+
+Unstructured logs like `logger.error("something went wrong")` or `console.log(data)` are unqueryable in Datadog, Splunk, CloudWatch, or any structured log aggregator — they make incident debugging significantly harder.
+
+## Mandatory metadata fields
+At minimum, every log call must include:
+
+| Field | Purpose |
+|-------|---------|
+| `requestId` / `traceId` | Correlates all log lines for a single request or trace |
+| `level` | Explicit severity — don't rely on the call site method name alone |
+| `message` | Human-readable description of the event |
+
+Additional fields by event type:
+- Auth/user events: `userId` or `sessionId`
+- Data mutations: `entityType`, `entityId`
+- External calls: `service`, `method`, `durationMs`
+- Errors: `error.message`, `error.stack`, `error.code`
+
+## Correct pattern
+```typescript
+// TypeScript / Node
+logger.error({
+  requestId: ctx.requestId,
+  userId: ctx.userId,
+  message: 'Payment authorisation failed',
+  error: { message: err.message, code: err.code },
+})
+```
+
+```python
+# Python
+logger.error({
+    "request_id": ctx.request_id,
+    "user_id": ctx.user_id,
+    "message": "Payment authorisation failed",
+    "error": str(e),
+})
+```
+
+## What to flag
+
+Flag and stop if you see:
+- `console.log(...)`, `console.error(...)`, `console.warn(...)` with a plain string or non-structured value in non-test code
+- `logger.info("string")` / `logger.error("string")` — plain strings without a structured object
+- `print(...)` used for operational logging (as opposed to CLI output or debug scripts)
+- Any log call missing `requestId` / `traceId` in a request-handling context
+
+## What not to flag
+- Test files (`*.test.*`, `*.spec.*`, `*_test.*`, `tests/`)
+- CLI tools or scripts where structured logging is inappropriate
+- Debug-only code clearly marked with a feature flag or env guard
+
+## Do not silently refactor
+Flag non-compliant calls and explain what fields are missing. Do not rewrite logging calls without asking — the developer needs to supply the correct context values (requestId, userId, etc.) from their execution context.
+
+## If no logger is configured
+If the project has no structured logger, flag the plain log call and suggest adding one (e.g. `pino`, `winston`, `structlog`, `zap`). Do not add the dependency without asking.

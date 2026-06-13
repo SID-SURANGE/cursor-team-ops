@@ -1,0 +1,61 @@
+---
+description: Transaction atomicity — wrap multi-step DB writes in explicit transactions with rollback paths
+globs: "**/*.ts,**/*.tsx,**/*.js,**/*.jsx,**/*.py,**/*.rb,**/*.go,**/*.java,**/*.cs,**/*.php"
+alwaysApply: false
+---
+
+# Transaction Atomicity
+
+## The rule
+Any function that executes two or more mutating database operations **must** wrap them in an explicit transaction with a rollback path. A partial write that succeeds while a sibling write fails leaves the database in an inconsistent state.
+
+## What counts as a mutating operation
+INSERT, UPDATE, DELETE, and their ORM equivalents: `.create()`, `.update()`, `.delete()`, `.save()`, `.destroy()`, `upsert`, bulk operations.
+
+## Required pattern
+```
+BEGIN TRANSACTION
+  write A
+  write B
+  [write C ...]
+COMMIT
+-- on any error: ROLLBACK
+```
+
+ORM equivalents:
+```typescript
+// Prisma
+await prisma.$transaction([writeA, writeB])
+
+// Sequelize
+await sequelize.transaction(async (t) => { ... })
+
+// TypeORM
+await manager.transaction(async (em) => { ... })
+```
+
+```python
+# SQLAlchemy
+with db.begin():
+    db.execute(write_a)
+    db.execute(write_b)
+
+# Django ORM
+with transaction.atomic():
+    model_a.save()
+    model_b.save()
+```
+
+## When to flag
+Flag the code and stop if you see:
+- Two or more DB writes in the same function with no transaction wrapper
+- A try/except or try/catch that catches a write failure but does not roll back prior writes
+- An async function that awaits multiple writes sequentially without a transaction
+
+## When not to apply
+- Read-only operations (SELECT, `.find()`, `.get()`)
+- A single atomic write (one INSERT, one UPDATE)
+- Writes to separate independent systems where distributed transactions are intentional and documented
+
+## Do not silently add transactions
+If a transaction wrapper is missing, flag it to the user and explain the consistency risk. Do not wrap existing code in a transaction without asking — it may change locking behaviour or performance characteristics in ways the developer needs to review.
