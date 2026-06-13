@@ -8,7 +8,7 @@
 
 Roll out consistent agent rules, skills, and git guardrails across your entire engineering team — in under 5 minutes.
 
-[![Version](https://img.shields.io/badge/version-1.3.0-6366f1?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.4.0-6366f1?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-06b6d4?style=flat-square)](#install-once-per-machine)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3fb950?style=flat-square)](CONTRIBUTING.md)
@@ -38,10 +38,10 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 
 | Layer | What it does |
 |-------|-------------|
-| 🛡️ **5 rules** | Always-on agent guardrails — minimal diffs, git safety, no secrets, doc standards |
-| 🧠 **14 skills** | On-demand workflows — debugging, PR creation, test writing, ADRs, and more |
-| 🪝 **2 hooks** | `git-guard.sh` blocks force-push to main · `session-context.sh` injects kit version |
-| ⚡ **3 commands** | `/pr` · `/review` · `/fix-issue` — starter slash commands for every repo |
+| 🛡️ **8 rules** | 5 always-on guardrails + 3 conditional rules (DB transactions, import boundaries, structured logging) |
+| 🧠 **16 skills** | On-demand workflows — PR creation, ADRs, session handoffs, doc sync, and more |
+| 🪝 **4 hooks** | `git-guard.sh` · `db-migration-guard.sh` · `license-gatekeeper.sh` · `session-context.sh` |
+| ⚡ **4 commands** | `/pr` · `/review` · `/fix-issue` · `/handoff` — starter slash commands for every repo |
 | 📋 **Templates** | `AGENTS.md` + `project-context.mdc` scaffolded into every new repo |
 
 ---
@@ -55,14 +55,18 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 │   ├── git-safety.mdc              │   ├── git-safety.mdc
 │   ├── agent-behavior.mdc          │   ├── agent-behavior.mdc
 │   ├── security-basics.mdc         │   ├── security-basics.mdc
-│   └── documentation.mdc           │   ├── documentation.mdc
-├── skills/  (14 skills)            │   └── project-context.mdc    ← yours to edit
-├── hooks/                          ├── skills/  (14 skills)
-│   ├── git-guard.sh                ├── commands/
-│   └── session-context.sh          │   ├── pr.md
-├── hooks.json                      │   ├── review.md
-└── .team-kit-version               │   └── fix-issue.md
-                                    └── hooks.json  (optional)
+│   ├── documentation.mdc           │   ├── documentation.mdc
+│   ├── transaction-atomicity.mdc   │   ├── transaction-atomicity.mdc
+│   ├── architectural-drift.mdc     │   ├── architectural-drift.mdc
+│   └── telemetry-standards.mdc     │   └── project-context.mdc    ← yours to edit
+├── skills/  (16 skills)            ├── skills/  (16 skills)
+├── hooks/                          ├── commands/
+│   ├── git-guard.sh                │   ├── pr.md
+│   ├── db-migration-guard.sh       │   ├── review.md
+│   ├── license-gatekeeper.sh       │   ├── fix-issue.md
+│   └── session-context.sh          │   └── handoff.md
+├── hooks.json                      └── hooks.json  (optional)
+└── .team-kit-version
       ↑ install.sh                        ↑ sync-project.sh
 ```
 
@@ -140,7 +144,9 @@ See [TEAMS.md](TEAMS.md) for complete examples: web app team, API team, monorepo
 
 ## Rules
 
-Five rules apply to every file in every session — no configuration needed.
+Five rules apply to every file in every session. Three additional rules apply conditionally based on file type.
+
+**Always-on**
 
 | Rule | Enforces |
 |------|---------|
@@ -150,33 +156,42 @@ Five rules apply to every file in every session — no configuration needed.
 | `security-basics` | No secrets in code · warn before staging sensitive files |
 | `documentation` | Precise prose · no invented requirements · cite existing content |
 
+**Conditional (file-type scoped)**
+
+| Rule | Scope | Enforces |
+|------|-------|---------|
+| `transaction-atomicity` | `*.ts/.js/.py/.go/.rb/.java` | Multi-step DB writes must use explicit transaction wrappers |
+| `architectural-drift` | `*.ts/.js/.py/.go/.java` | No cross-domain imports into private paths; defers to `.deprc.json` |
+| `telemetry-standards` | `*.ts/.js/.py/.go/.java` | Structured logging objects required; plain string log calls blocked |
+
 ---
 
 ## Skills
 
 Skills fire automatically when the agent detects a trigger phrase.
 
+**Core skills**
+
 | Skill | Say this to trigger it |
 |-------|----------------------|
-| `discover-repo` | *"explore this codebase"* / *"walk me through this project"* |
 | `pre-commit-check` | *"commit this"* / *"create a commit"* |
+| `commit-message` | *"write a commit message"* / *"conventional commit"* |
 | `pr-summary` | *"open a PR"* / *"push and PR"* |
-| `minimal-diff-review` | *"review my changes"* |
-| `requirements-qa` | *(auto — when working in BRD / docs folders)* |
-| `workflow-from-chats` | *"make this a skill"* / *"extract this workflow"* |
-| `verify-this` | *"verify this"* / *"prove this works"* |
+| `minimal-diff-review` | *"review my changes"* / *"check the diff"* |
 | `pr-review-canvas` | *"review canvas"* / *"map this PR"* |
-| `deslop` | *"deslop"* / *"remove dead code"* |
-| `fix-merge-conflicts` | *"fix merge conflicts"* |
-| `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* |
-| `systematic-debugging` | *"debug this"* / *"I can't figure out why"* |
-| `writing-tests` | *"write tests for this"* / *"what should I test"* |
+| `requirements-qa` | *(auto — when working in BRD / docs / requirements folders)* |
 | `architecture-decision-records` | *"create an ADR"* / *"document this decision"* |
+| `deslop` | *"deslop"* / *"clean this up"* / *"remove dead code"* |
+| `sync-docs-after-edit` | *"sync docs"* / *"did my change break any docs?"* |
+| `document-this` | *"document this"* / *"add a why-comment"* |
+| `write-changelog` | *"write a changelog entry"* / *"update CHANGELOG"* |
+| `handoff` | *"generate handoff"* / *"close session"* |
 
 ### Community skills
 
 | Skill | Triggered by |
 |-------|-------------|
+| `workflow-from-chats` | *"make this a skill"* / *"extract this workflow"* |
 | `spec-driven-development` | *"write a spec"* / *"spec this out"* / *"define this first"* |
 | `security-hardening` | *"security review"* / *"harden this"* / *"check for vulnerabilities"* |
 | `ci-cd-pipeline` | *"set up CI"* / *"add GitHub Actions"* / *"fix the pipeline"* |
@@ -192,7 +207,9 @@ See [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md) for ful
 | Hook | Event | Behaviour |
 |------|-------|-----------|
 | `git-guard.sh` | `beforeShellExecution` | **Blocks** force-push to main/master · **warns** on hard reset, `--no-verify`, root `rm -rf` |
-| `session-context.sh` | `sessionStart` | Injects kit version + active rules/skills list at session start |
+| `db-migration-guard.sh` | `beforeShellExecution` | **Blocks** commits with DROP COLUMN, NOT NULL without default, non-CONCURRENT index, DROP TABLE, TRUNCATE |
+| `license-gatekeeper.sh` | `beforeShellExecution` | **Blocks** commits adding GPL/AGPL/LGPL/SSPL/EUPL licensed packages |
+| `session-context.sh` | `sessionStart` | Injects kit version + active rules/skills/hooks list at session start |
 
 See [hooks/README.md](hooks/README.md) for schema reference, testing guide, and how to add project-level hooks.
 
@@ -238,6 +255,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the quality bar, `SKILL.md` format, a
 
 ## Attributions
 
-Three core skills (`systematic-debugging`, `writing-tests`, `architecture-decision-records`) were inspired by [awesome-cursor-skills](https://github.com/spencerpauly/awesome-cursor-skills) (Spencer Pauly). Three community skills were informed by [agent-skills](https://github.com/addyosmani/agent-skills) (Addy Osmani, MIT). No text was copied from either source. Full details: [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md).
+One core skill (`architecture-decision-records`) was inspired by [awesome-cursor-skills](https://github.com/spencerpauly/awesome-cursor-skills) (Spencer Pauly). Three community skills were informed by [agent-skills](https://github.com/addyosmani/agent-skills) (Addy Osmani, MIT). No text was copied from either source. Full details: [skills/community/ATTRIBUTIONS.md](skills/community/ATTRIBUTIONS.md).
 
 > This kit is **unofficial** and not affiliated with or endorsed by Anysphere (Cursor). "Cursor" is a trademark of Anysphere, Inc.

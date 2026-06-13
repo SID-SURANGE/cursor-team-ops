@@ -1,0 +1,47 @@
+---
+description: Architectural drift — flag cross-domain import boundary violations to preserve module separation
+globs: "**/*.ts,**/*.tsx,**/*.js,**/*.jsx,**/*.py,**/*.go,**/*.java,**/*.rb,**/*.cs"
+alwaysApply: false
+---
+
+# Architectural Drift
+
+## The rule
+Do not import private or internal modules across domain boundaries unless the target module is explicitly designated as a shared/public API.
+
+A domain boundary is a top-level directory that represents a distinct business or technical domain: `billing/`, `shipping/`, `auth/`, `notifications/`, `payments/`, `core/`, `infra/`, etc.
+
+## What to check
+When writing or reviewing a file, check its import statements:
+
+1. Identify which domain the **current file** belongs to (its top-level directory).
+2. For each import, identify which domain the **imported file** belongs to.
+3. Flag any import that crosses from one domain into another domain's **non-public** path.
+
+## Public vs. private paths
+- **Public (allowed)**: `domain/index.ts`, `domain/api.ts`, `domain/public/`, `domain/types.ts`, explicitly exported barrel files.
+- **Private (flag)**: `domain/internal/`, `domain/lib/`, `domain/utils/`, `domain/helpers/`, `domain/services/` — unless explicitly re-exported from a public barrel.
+
+## Project boundary config
+If the repo contains a `.deprc.json`, `dep-cruiser.config.js`, `import-boundaries.json`, or similar boundary config file, use it as the authoritative source of allowed paths. Defer to it over these defaults.
+
+## When to flag
+```
+// billing/invoice.ts importing from shipping internals — FLAG
+import { ShipmentHelper } from '../shipping/lib/helpers'
+
+// billing/invoice.ts importing from shipping public API — ALLOW
+import { ShipmentStatus } from '../shipping/index'
+import { ShipmentStatus } from '../shipping/types'
+```
+
+Flag the violation and explain:
+- Which boundary was crossed
+- What the importing file is trying to use
+- Whether a public API for that functionality exists, or whether it should be extracted to a shared module
+
+## Do not silently fix
+Do not refactor import paths or move files to resolve a boundary violation without asking. The correct fix may be: updating the boundary config, extracting a shared module, or refactoring the caller — the developer needs to choose.
+
+## Shared/common modules
+Modules under `shared/`, `common/`, `lib/`, `utils/` at the **repo root** (not nested under a domain) are available to all domains and are not subject to this rule.

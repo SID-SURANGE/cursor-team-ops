@@ -2,10 +2,11 @@
 
 # 🛡️ Rules
 
-[![rules](https://img.shields.io/badge/rules-5%20always--on-6366f1?style=flat-square)](#rule-reference)
-[![scope](https://img.shields.io/badge/scope-all%20files%20%7C%20all%20sessions-06b6d4?style=flat-square)](#rule-reference)
+[![rules](https://img.shields.io/badge/rules-8%20total-6366f1?style=flat-square)](#rule-reference)
+[![always-on](https://img.shields.io/badge/always--on-5-a855f7?style=flat-square)](#rule-reference)
+[![conditional](https://img.shields.io/badge/conditional-3-06b6d4?style=flat-square)](#rule-reference)
 
-Always-on agent guardrails — loaded automatically in every session, every file, every repo.
+Agent guardrails loaded automatically every session. Five rules apply to all files; three apply conditionally based on file type.
 No trigger phrase needed. No configuration required.
 
 </div>
@@ -39,6 +40,8 @@ Rules live in two places after install:
 
 ## Rule reference
 
+**Always-on**
+
 | File | `alwaysApply` | Scope | Enforces |
 |------|:-------------:|-------|---------|
 | `core-development.mdc` | ✅ | all files | Minimal diffs · match existing style · no placeholders · no over-engineering |
@@ -46,6 +49,14 @@ Rules live in two places after install:
 | `agent-behavior.mdc` | ✅ | all files | Read before edit · use tools not shell · concise output · no preamble · parallel tool calls |
 | `security-basics.mdc` | ✅ | all files | No secrets in code or commits · warn before staging sensitive files |
 | `documentation.mdc` | ❌ | `**/*.md`, `**/*.mdc` | Precise prose · no invented requirements · cite existing content · no duplicate files |
+
+**Conditional (file-type scoped)**
+
+| File | `alwaysApply` | Scope | Enforces |
+|------|:-------------:|-------|---------|
+| `transaction-atomicity.mdc` | ❌ | `*.ts/.js/.py/.go/.rb/.java/.cs` | Multi-step DB writes must use explicit transaction wrappers with rollback paths |
+| `architectural-drift.mdc` | ❌ | `*.ts/.js/.py/.go/.java/.rb/.cs` | No cross-domain imports into private paths; defers to `.deprc.json` if present |
+| `telemetry-standards.mdc` | ❌ | `*.ts/.js/.py/.go/.java/.rb/.cs` | Structured logging objects required; plain string log calls blocked in production code |
 
 ---
 

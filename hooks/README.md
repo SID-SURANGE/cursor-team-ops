@@ -2,11 +2,11 @@
 
 # 🪝 Hooks
 
-[![hooks](https://img.shields.io/badge/hooks-2%20active-3fb950?style=flat-square)](#installed-hooks)
+[![hooks](https://img.shields.io/badge/hooks-4%20active-3fb950?style=flat-square)](#installed-hooks)
 [![events](https://img.shields.io/badge/events-beforeShellExecution%20%7C%20sessionStart-06b6d4?style=flat-square)](#supported-events)
 
 Shell scripts Cursor executes automatically at lifecycle events.
-`git-guard.sh` enforces git safety. `session-context.sh` stamps every session with the kit version.
+`git-guard.sh` enforces git safety. `db-migration-guard.sh` blocks destructive migrations. `license-gatekeeper.sh` blocks copyleft packages. `session-context.sh` stamps every session with the kit version.
 
 </div>
 
@@ -97,9 +97,25 @@ Intercepts shell commands that match `git|rm\s+-r` and enforces the team's git-s
 | `rm -rf /` or `rm -rf ~` (root/home) | **Deny** — blocked outright |
 | Everything else | **Allow** |
 
+### `db-migration-guard.sh` — `beforeShellExecution`
+
+Intercepts `git commit` commands and scans staged migration files (`.sql`, ORM migration files in standard paths) for destructive patterns:
+
+| Pattern | Action |
+|---------|--------|
+| `DROP COLUMN` | **Deny** — permanent data loss without a prior deprecation phase |
+| `NOT NULL` without `DEFAULT` | **Deny** — full table lock on large tables |
+| `CREATE INDEX` without `CONCURRENTLY` | **Deny** — table lock during index build (PostgreSQL) |
+| `DROP TABLE` | **Deny** — irreversible without a backup |
+| `TRUNCATE` | **Deny** — destroys all rows, bypasses row-level triggers |
+
+### `license-gatekeeper.sh` — `beforeShellExecution`
+
+Intercepts `git commit` commands and checks staged lockfile/manifest changes for packages with restrictive copyleft licenses (GPL-2/3, AGPL-3, LGPL, SSPL, EUPL). Uses `license-checker` (Node), `pip-licenses` (Python), or `cargo-license` (Rust) where available; falls back to diff inspection.
+
 ### `session-context.sh` — `sessionStart`
 
-Reads `~/.cursor/.team-kit-version` and injects a context string listing the active kit version, all always-on rules, and available skills. This ensures the agent knows the kit is loaded even when project `.cursor/` files are not present.
+Reads `~/.cursor/.team-kit-version` and injects a context string listing the active kit version, all rules, available skills, and registered hooks. This ensures the agent knows the kit is loaded even when project `.cursor/` files are not present.
 
 ---
 
