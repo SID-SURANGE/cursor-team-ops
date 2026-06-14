@@ -29,7 +29,7 @@ Restart or reload Cursor after install.
 **Verify (machine — filesystem, not Settings UI):**
 
 - [ ] `~/.cursor/rules/` contains five `.mdc` files (`core-development`, `git-safety`, etc.)
-- [ ] `~/.cursor/skills/` contains 16 skill directories, each with `SKILL.md`
+- [ ] `~/.cursor/skills/` contains skill directories, each with `SKILL.md` (`ls ~/.cursor/skills/ | wc -l` shows the count)
 - [ ] `~/.cursor/hooks.json` exists
 - [ ] `cat ~/.cursor/.team-kit-version` shows the kit version (e.g. `1.1.0`)
 
@@ -64,7 +64,7 @@ Then edit:
 - [ ] Open **Cursor Settings → Rules, Commands**
 - [ ] Select the **project** tab (e.g. `briefcast`), not only **User** or **All**
 - [ ] **Rules:** team rules + `project-context` (and `CLAUDE` / `AGENTS` if present at repo root)
-- [ ] **Skills:** 14 core skills listed
+- [ ] **Skills:** core skills listed (count should match `ls skills/core/ | wc -l` in the kit repo)
 - [ ] **Commands:** `/pr`, `/review`, `/fix-issue` (from bootstrap)
 
 **Optional — agent / hooks:**
@@ -82,12 +82,14 @@ Run `sync-project.sh` only if team rules/skills are missing. Keep repo-specific 
 
 | Task | Kit handles via |
 |------|----------------|
+| First day / new repo | Say "onboard me" or "I'm new" → `onboarding` skill |
 | Commit changes | Say "commit this" → `pre-commit-check` skill → then commit |
 | Open a PR | Say "create a PR" → `pr-summary` skill |
 | Review a diff | Say "review my changes" → `minimal-diff-review` skill |
 | Work on BRD/docs | `documentation` rule + `requirements-qa` skill (automatic) |
-| End a session | Say "generate handoff" → `handoff` skill |
-| Try to force-push | `git-guard.sh` hook blocks/warns |
+| End a session | Say "EOD" or "generate handoff" → `handoff` skill (writes `.cursor/session-handoff.md`) |
+| Next session start | `sessionStart` hook auto-loads last handoff — Claude resumes with context |
+| Try to push to main | `git-guard.sh` hook blocks direct and force pushes to main/master |
 | Commit a destructive migration | `db-migration-guard.sh` hook blocks |
 | Add a copyleft package | `license-gatekeeper.sh` hook blocks |
 

@@ -40,6 +40,16 @@ if [ -z "$raw_cmd" ]; then
   exit 0
 fi
 
+# ── Block: any direct push to main or master (non-force) ─────────────────────
+# Matches: git push origin main, git push -u origin main,
+#          git push --set-upstream origin main, git push origin HEAD:main
+if echo "$raw_cmd" | grep -qE 'git\s+push\b' && \
+   echo "$raw_cmd" | grep -qE '(^|\s|:)(main|master)(\s|$)' && \
+   ! echo "$raw_cmd" | grep -qE '(--force\b|-f\b|-f\s)'; then
+  printf '%s\n' '{"permission":"deny","user_message":"Direct push to main/master is blocked. Open a pull request from a feature branch instead.","agent_message":"Direct push to main/master blocked by team hook (git-safety rule). Commit to a feature branch and open a PR."}'
+  exit 0
+fi
+
 # ── Block: force push to main or master ──────────────────────────────────────
 if echo "$raw_cmd" | grep -qE 'git\s+push.*(--force|-f).*\s(main|master)(\s|$)'; then
   printf '%s\n' '{"permission":"deny","user_message":"Force push to main/master is blocked by the team git-guard hook. Use a feature branch, or explicitly request an override.","agent_message":"Force push to main/master blocked by team hook (git-safety rule)."}'

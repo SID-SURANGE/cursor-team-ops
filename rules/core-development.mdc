@@ -39,3 +39,9 @@ alwaysApply: true
 ## Over-engineering
 - Do not over-abstract. One or two-line helpers that should just be inline are not helpers.
 - Avoid excessive error handling for edges that are impossible or extremely unlikely.
+
+## Error handling
+- Never swallow exceptions silently: no bare `except: pass`, no empty `catch(e) {}`, no `catch` that only logs without re-throwing or returning a typed error.
+- Always include context in error messages — what was being attempted, and what input or state caused the failure.
+- Fail loudly at system boundaries (API calls, file I/O, DB queries). Quiet failures hide bugs from junior reviewers.
+- Do not catch errors at multiple levels for the same operation — handle once, at the right boundary.

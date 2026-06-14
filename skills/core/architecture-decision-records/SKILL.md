@@ -1,7 +1,7 @@
 ---
 name: architecture-decision-records
 inspired-by: "awesome-cursor-skills (github.com/spencerpauly/awesome-cursor-skills) — ADR workflow and template structure. No text copied. Original work."
-description: Create or update an ADR file following the standard template (Context, Decision, Consequences). Triggered by "create an ADR", "document this decision", "architecture-decision-records".
+description: Create or update an ADR file following the standard template (Context, Decision, Consequences). Triggered by "create an ADR", "document this decision", "write an ADR", "record this architectural decision", "I need to document why we chose", "adr", "log this design decision", "why did we pick this approach", "architecture-decision-records".
 ---
 
 # 🏛️ Skill: architecture-decision-records

@@ -1,0 +1,91 @@
+# .cursorignore — files excluded from Cursor's AI context
+# Copy this to your project root. Customize per project.
+# Syntax is identical to .gitignore.
+
+# Secrets and credentials — never feed these to the model
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*secret*
+*credentials*
+credentials.json
+secrets.json
+*.cert
+
+# Dependencies — large, noisy, rarely useful as context
+node_modules/
+.pnp/
+.pnp.js
+vendor/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.tox/
+site-packages/
+
+# Build and generated output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+coverage/
+*.min.js
+*.min.css
+*.map
+
+# Lock files — token-expensive with minimal AI value
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+poetry.lock
+Pipfile.lock
+Gemfile.lock
+composer.lock
+go.sum
+Cargo.lock
+
+# IDE and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large data / binary assets
+*.sql
+*.sqlite
+*.db
+*.csv
+*.parquet
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.mp4
+*.mp3
+*.pdf
+*.zip
+*.tar.gz
+*.gz
+
+# Logs and temp
+*.log
+logs/
+tmp/
+temp/
+.cache/
