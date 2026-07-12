@@ -2,7 +2,7 @@
 
 # 📋 Changelog
 
-[![Version](https://img.shields.io/badge/latest-1.4.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/releases)
+[![Version](https://img.shields.io/badge/latest-1.5.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/releases)
 
 All notable changes to cursor-team-ops are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
@@ -11,13 +11,15 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## 1.5.0 — 2026-07-12
 
 ### Added
 
 - `plugins/git-guardrails/` — first Cursor **marketplace plugin**: bundles the three blocking `beforeShellExecution` hooks (`git-guard`, `db-migration-guard`, `license-gatekeeper`) plus the `git-safety` rule, installable via the plugin marketplace / Team Marketplace "Import from Repo"
 - `.cursor-plugin/marketplace.json` — repo-as-marketplace catalog (`pluginRoot: plugins`)
 - `plugins/git-guardrails/.cursor-plugin/plugin.json` + `hooks/hooks.json` — plugin manifest and hook registration
+- `plugins/git-guardrails/logo.{svg,png}` — square 1:1 marketplace logo (shield + git-branch), shown in the plugin README and used for the publisher listing
+- Badges (Cursor Plugin / version / license) on the git-guardrails README
 - CI: `plugins/**/README.md` added to the markdown-lint glob
 
 ### Changed
