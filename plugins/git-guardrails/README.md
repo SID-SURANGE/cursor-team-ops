@@ -1,3 +1,5 @@
+<img src="logo.svg" alt="Git Guardrails" width="96" align="left" />
+
 # Git Guardrails
 
 **Blocking hooks that stop dangerous actions before they run — not after.**
