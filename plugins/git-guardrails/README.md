@@ -3,7 +3,7 @@
 # Git Guardrails
 
 [![Cursor Plugin](https://img.shields.io/badge/Cursor-Plugin-black?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops)
-[![Version](https://img.shields.io/badge/version-1.0.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/releases)
+[![Version](https://img.shields.io/badge/version-1.5.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
 **Blocking hooks that stop dangerous actions before they run — not after.**

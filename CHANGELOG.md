@@ -2,7 +2,7 @@
 
 # 📋 Changelog
 
-[![Version](https://img.shields.io/badge/latest-1.4.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/releases)
+[![Version](https://img.shields.io/badge/latest-1.5.0-6366f1?style=flat-square)](https://github.com/SID-SURANGE/cursor-team-ops/releases)
 
 All notable changes to cursor-team-ops are documented here.
 Versions follow [Semantic Versioning](https://semver.org/).
@@ -11,7 +11,7 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## 1.5.0 — 2026-07-12
 
 ### Added
 
