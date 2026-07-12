@@ -18,6 +18,8 @@ Versions follow [Semantic Versioning](https://semver.org/).
 - `plugins/git-guardrails/` — first Cursor **marketplace plugin**: bundles the three blocking `beforeShellExecution` hooks (`git-guard`, `db-migration-guard`, `license-gatekeeper`) plus the `git-safety` rule, installable via the plugin marketplace / Team Marketplace "Import from Repo"
 - `.cursor-plugin/marketplace.json` — repo-as-marketplace catalog (`pluginRoot: plugins`)
 - `plugins/git-guardrails/.cursor-plugin/plugin.json` + `hooks/hooks.json` — plugin manifest and hook registration
+- `plugins/git-guardrails/logo.{svg,png}` — square 1:1 marketplace logo (shield + git-branch), shown in the plugin README and used for the publisher listing
+- Badges (Cursor Plugin / version / license) on the git-guardrails README
 - CI: `plugins/**/README.md` added to the markdown-lint glob
 
 ### Changed
