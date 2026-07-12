@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="assets/banner.png" alt="cursor-team-ops — team-ops layer for Cursor AI" width="100%" />
+<img src="assets/banner.png" alt="cursor-team-ops — enforcement & release-hygiene layer for Cursor agents" width="100%" />
 
 # ⚙️ cursor-team-ops
 
-**The team-ops layer for Cursor AI**
+**Hard guardrails and release discipline for Cursor agents**
 
-Roll out consistent agent rules, skills, and git guardrails across your entire engineering team — in under 5 minutes.
+Blocking hooks, commit hygiene, and docs-ops that advisory rules can't enforce — for your whole team.
 
 [![Version](https://img.shields.io/badge/version-1.4.0-6366f1?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-a855f7?style=flat-square)](LICENSE)
