@@ -11,6 +11,22 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- `plugins/git-guardrails/` — first Cursor **marketplace plugin**: bundles the three blocking `beforeShellExecution` hooks (`git-guard`, `db-migration-guard`, `license-gatekeeper`) plus the `git-safety` rule, installable via the plugin marketplace / Team Marketplace "Import from Repo"
+- `.cursor-plugin/marketplace.json` — repo-as-marketplace catalog (`pluginRoot: plugins`)
+- `plugins/git-guardrails/.cursor-plugin/plugin.json` + `hooks/hooks.json` — plugin manifest and hook registration
+- CI: `plugins/**/README.md` added to the markdown-lint glob
+
+### Changed
+
+- `README.md` — plugin marketplace install is now the primary path; script install (`install.sh` / `sync-project.sh`) demoted to a documented alternative for teams without plugin support
+- Artefacts are copied into the plugin tree (additive); the flat `rules/`/`skills/`/`hooks/` layout and its installer scripts are unchanged and still supported
+
+---
+
 ## 1.4.0 — 2026-06-13
 
 ### Added

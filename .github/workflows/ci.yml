@@ -119,6 +119,7 @@ jobs:
             rules/README.md
             skills/**/README.md
             skills/**/ATTRIBUTIONS.md
+            plugins/**/README.md
           config: .markdownlint.json
 
   # ── 6. Check no placeholder text left in new skills ────────────────────────

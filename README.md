@@ -46,7 +46,30 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 
 ---
 
-## How it works
+## Install as a Cursor plugin (recommended)
+
+Cursor's native plugin marketplace is now the primary way to install. Plugins
+are versioned, auto-updating, and — on Teams/Enterprise — can be marked
+**Required** so they can't be disabled.
+
+**Team Marketplace** (Teams/Enterprise): **Dashboard → Plugins → Import from
+Repo** → `SID-SURANGE/cursor-team-ops`, then enable the plugins you want.
+
+**Individual plugin**: search the Marketplace browser and install. Available now:
+
+| Plugin | What it ships |
+|--------|---------------|
+| 🛡️ **[Git Guardrails](plugins/git-guardrails/)** | Blocking hooks: dangerous git pushes, destructive DB migrations, and copyleft-licensed dependencies — stopped before they run. The enforcement no advisory rule can provide. |
+
+> More plugins (`ship-hygiene`, `docs-ops`) are staged for follow-up releases.
+> Prefer scripts, or on a plan without plugin support? See
+> [Install via scripts](#install-via-scripts-alternative) below.
+
+Restart Cursor after installing.
+
+---
+
+## How it works (script install)
 
 ```text
 ~/.cursor/                          your-repo/.cursor/
@@ -72,7 +95,11 @@ One `git pull` on the kit keeps every developer and every repo in sync.
 
 ---
 
-## Quick start
+## Install via scripts (alternative)
+
+Use this if you're not on a Cursor plan with plugin support, or you want the
+skills and rules symlinked into `~/.cursor/` directly. Same artefacts, manual
+distribution.
 
 ### 1 — Install on your machine (once)
 

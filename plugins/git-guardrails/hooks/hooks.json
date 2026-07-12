@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "./hooks/git-guard.sh",
+        "matcher": "git|rm\\s+-r",
+        "failClosed": false
+      },
+      {
+        "command": "./hooks/db-migration-guard.sh",
+        "matcher": "git\\s+commit",
+        "failClosed": false
+      },
+      {
+        "command": "./hooks/license-gatekeeper.sh",
+        "matcher": "git\\s+commit",
+        "failClosed": false
+      }
+    ]
+  }
+}
